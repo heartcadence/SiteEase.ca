@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from './Button';
+import { CheckCircle, ArrowRight } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -11,10 +13,22 @@ export const Footer: React.FC = () => {
     const email = formData.get('email') as string;
     const message = formData.get('message') as string;
 
+    // Use \r\n for better compatibility with email clients like Outlook
     const subject = `SiteEase Inquiry from ${name}`;
-    const body = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
+    const body = `Name: ${name}\r\nEmail: ${email}\r\n\r\nMessage:\r\n${message}`;
 
-    window.location.href = `mailto:info@heartcadence.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const mailtoLink = `mailto:info@heartcadence.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    // Create a temporary link to trigger the mailto
+    // This is often more reliable than window.location.href in preventing page unload issues
+    const link = document.createElement('a');
+    link.href = mailtoLink;
+    link.style.display = 'none';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    setIsSubmitted(true);
   };
 
   return (
@@ -47,53 +61,72 @@ export const Footer: React.FC = () => {
 
           {/* Right Column: Contact Form */}
           <div className="bg-slate-900">
-            <form className="space-y-6" onSubmit={handleSubmit}>
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium text-slate-300 mb-2">
-                  Full Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  required
-                  className="w-full rounded-lg bg-slate-800 border border-slate-700 px-4 py-3 text-white placeholder-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all"
-                  placeholder="Jane Doe"
-                />
-              </div>
+            {!isSubmitted ? (
+              <form className="space-y-6" onSubmit={handleSubmit}>
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium text-slate-300 mb-2">
+                    Full Name
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    required
+                    className="w-full rounded-lg bg-slate-800 border border-slate-700 px-4 py-3 text-white placeholder-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all"
+                    placeholder="Jane Doe"
+                  />
+                </div>
 
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-2">
-                  Email Address
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  className="w-full rounded-lg bg-slate-800 border border-slate-700 px-4 py-3 text-white placeholder-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all"
-                  placeholder="jane@company.com"
-                />
-              </div>
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-2">
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                    className="w-full rounded-lg bg-slate-800 border border-slate-700 px-4 py-3 text-white placeholder-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all"
+                    placeholder="jane@company.com"
+                  />
+                </div>
 
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-slate-300 mb-2">
-                  Tell us about your needs
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows={4}
-                  required
-                  className="w-full rounded-lg bg-slate-800 border border-slate-700 px-4 py-3 text-white placeholder-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all resize-none"
-                  placeholder="I need a new website for my..."
-                ></textarea>
-              </div>
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium text-slate-300 mb-2">
+                    Tell us about your needs
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows={4}
+                    required
+                    className="w-full rounded-lg bg-slate-800 border border-slate-700 px-4 py-3 text-white placeholder-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all resize-none"
+                    placeholder="I need a new website for my..."
+                  ></textarea>
+                </div>
 
-              <Button type="submit" fullWidth className="h-12 text-base">
-                Request Consultation
-              </Button>
-            </form>
+                <Button type="submit" fullWidth className="h-12 text-base">
+                  Request Consultation
+                </Button>
+              </form>
+            ) : (
+              <div className="bg-slate-800 rounded-2xl p-8 border border-slate-700 text-center animate-in fade-in duration-500">
+                <div className="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <CheckCircle className="w-8 h-8 text-green-500" />
+                </div>
+                <h3 className="text-xl font-bold text-white mb-2">Email Client Opened!</h3>
+                <p className="text-slate-400 mb-8">
+                  We've opened your default email client with your message pre-filled. Please hit "Send" to complete your inquiry.
+                </p>
+                <Button 
+                  variant="secondary" 
+                  onClick={() => setIsSubmitted(false)}
+                  className="mx-auto"
+                >
+                  Send Another Message <ArrowRight className="ml-2 w-4 h-4" />
+                </Button>
+              </div>
+            )}
           </div>
         </div>
 
