@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from './Button';
-import { CheckCircle, ArrowRight } from 'lucide-react';
+import { CheckCircle, ArrowRight, Mail } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -111,19 +111,19 @@ export const Footer: React.FC = () => {
               </form>
             ) : (
               <div className="bg-slate-800 rounded-2xl p-8 border border-slate-700 text-center animate-in fade-in duration-500">
-                <div className="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <CheckCircle className="w-8 h-8 text-green-500" />
+                <div className="w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Mail className="w-8 h-8 text-blue-400" />
                 </div>
-                <h3 className="text-xl font-bold text-white mb-2">Email Client Opened!</h3>
+                <h3 className="text-xl font-bold text-white mb-2">Almost there...</h3>
                 <p className="text-slate-400 mb-8">
-                  We've opened your default email client with your message pre-filled. Please hit "Send" to complete your inquiry.
+                  We've opened your email app with a pre-filled draft. Please hit <strong>Send</strong> to officially submit your inquiry.
                 </p>
                 <Button 
                   variant="secondary" 
                   onClick={() => setIsSubmitted(false)}
                   className="mx-auto"
                 >
-                  Send Another Message <ArrowRight className="ml-2 w-4 h-4" />
+                  Return to Form <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </div>
             )}
