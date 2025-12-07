@@ -1,86 +1,97 @@
 import React from 'react';
-import { MapPin, Mail, Phone } from 'lucide-react';
+import { Button } from './Button';
 
 export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-slate-900 text-slate-300 py-12 border-t border-slate-800">
+    <footer className="bg-slate-900 text-white pt-16 pb-8 border-t border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+        
+        {/* Main Footer Content: Contact & Form */}
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 mb-16 items-start">
           
-          {/* Brand Column */}
-          <div className="col-span-1 md:col-span-1">
-            <a href="#" className="flex items-center gap-2 mb-4 text-white group">
-              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center group-hover:bg-blue-700 transition-colors">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="w-5 h-5 text-white"
-                  aria-hidden="true"
-                >
-                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                  <path d="M9 14h6" />
-                  <path d="M9 18h6" />
-                </svg>
-              </div>
-              <span className="font-bold text-xl">SiteEase.ca</span>
-            </a>
-            <p className="text-sm text-slate-400 mb-6">
-              Making the web simple for Canadian businesses. Professional results, zero technical hassle.
+          {/* Left Column: value prop & Contact Info */}
+          <div>
+            <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl mb-6">
+              Ready to simplify your web presence?
+            </h2>
+            <p className="text-lg text-slate-400 mb-8 max-w-lg leading-relaxed">
+              Get started with SiteEase today. Fill out the form, and our onboarding specialist will contact you within 24 hours to begin your hassle-free journey.
             </p>
-            <div className="flex flex-col gap-2 text-sm">
-              <div className="flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-blue-500" />
-                <span>Ontario, Canada</span>
-              </div>
+            
+            <div className="space-y-4 text-slate-300">
+              <p>
+                <span className="font-semibold text-white block mb-1">Email:</span> 
+                <a href="mailto:support@siteease.ca" className="hover:text-blue-400 transition-colors">support@siteease.ca</a>
+              </p>
+              <p>
+                <span className="font-semibold text-white block mb-1">Hours:</span> 
+                Mon-Fri, 9am - 5pm EST
+              </p>
             </div>
           </div>
 
-          {/* Links Column 1 */}
-          <div>
-            <h4 className="text-white font-semibold mb-4">Service</h4>
-            <ul className="space-y-2 text-sm">
-              <li><a href="#features" className="hover:text-white transition-colors">Features</a></li>
-              <li><a href="#pricing" className="hover:text-white transition-colors">Pricing</a></li>
-              <li><a href="#portfolio" className="hover:text-white transition-colors">Portfolio</a></li>
-              <li><a href="#faq" className="hover:text-white transition-colors">FAQ</a></li>
-            </ul>
-          </div>
+          {/* Right Column: Contact Form */}
+          <div className="bg-slate-900">
+            <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium text-slate-300 mb-2">
+                  Full Name
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  className="w-full rounded-lg bg-slate-800 border border-slate-700 px-4 py-3 text-white placeholder-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all"
+                  placeholder="Jane Doe"
+                />
+              </div>
 
-          {/* Links Column 2 */}
-          <div>
-            <h4 className="text-white font-semibold mb-4">Company</h4>
-            <ul className="space-y-2 text-sm">
-              <li><a href="#about" className="hover:text-white transition-colors">About Us</a></li>
-              <li><a href="#contact" className="hover:text-white transition-colors">Contact</a></li>
-              <li><a href="#blog" className="hover:text-white transition-colors">Blog</a></li>
-              <li><a href="#careers" className="hover:text-white transition-colors">Careers</a></li>
-            </ul>
-          </div>
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-2">
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  className="w-full rounded-lg bg-slate-800 border border-slate-700 px-4 py-3 text-white placeholder-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all"
+                  placeholder="jane@company.com"
+                />
+              </div>
 
-          {/* Legal Column */}
-          <div>
-            <h4 className="text-white font-semibold mb-4">Legal</h4>
-            <ul className="space-y-2 text-sm">
-              <li><a href="#privacy" className="hover:text-white transition-colors">Privacy Policy</a></li>
-              <li><a href="#terms" className="hover:text-white transition-colors">Terms of Service</a></li>
-              <li><a href="#cookies" className="hover:text-white transition-colors">Cookie Policy</a></li>
-              <li><a href="#accessibility" className="hover:text-white transition-colors">Accessibility Statement</a></li>
-            </ul>
-            <p className="mt-4 text-xs text-slate-500">
-              Compliant with PIPEDA & GDPR.
-            </p>
+              <div>
+                <label htmlFor="message" className="block text-sm font-medium text-slate-300 mb-2">
+                  Tell us about your needs
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows={4}
+                  className="w-full rounded-lg bg-slate-800 border border-slate-700 px-4 py-3 text-white placeholder-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all resize-none"
+                  placeholder="I need a new website for my..."
+                ></textarea>
+              </div>
+
+              <Button type="submit" fullWidth className="h-12 text-base">
+                Request Consultation
+              </Button>
+            </form>
           </div>
         </div>
 
-        <div className="pt-8 border-t border-slate-800 text-center text-sm text-slate-500">
+        {/* Divider */}
+        <div className="border-t border-slate-800 my-8"></div>
+
+        {/* Bottom Bar: Legal & Copyright */}
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-500">
           <p>&copy; {currentYear} SiteEase.ca. All rights reserved.</p>
+          <div className="flex flex-wrap justify-center gap-6">
+            <a href="#privacy" className="hover:text-white transition-colors">Privacy Policy</a>
+            <a href="#terms" className="hover:text-white transition-colors">Terms of Service</a>
+            <a href="#accessibility" className="hover:text-white transition-colors">Accessibility</a>
+          </div>
         </div>
       </div>
     </footer>

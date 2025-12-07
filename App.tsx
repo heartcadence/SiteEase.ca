@@ -3,7 +3,6 @@ import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { Services } from './components/Services';
 import { Pricing } from './components/Pricing';
-import { CtaSection } from './components/CtaSection';
 import { Footer } from './components/Footer';
 import { CookieConsent } from './components/CookieConsent';
 
@@ -24,7 +23,6 @@ function App() {
         <Hero />
         <Services />
         <Pricing />
-        <CtaSection />
       </main>
 
       <Footer />
