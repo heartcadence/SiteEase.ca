@@ -1,34 +1,54 @@
 import React, { useState } from 'react';
 import { Button } from './Button';
-import { CheckCircle, ArrowRight, Mail } from 'lucide-react';
+import { CheckCircle, ArrowRight, Loader2, AlertCircle } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    setError(null);
+    
     const formData = new FormData(e.currentTarget);
-    const name = formData.get('name') as string;
-    const email = formData.get('email') as string;
-    const message = formData.get('message') as string;
+    
+    try {
+      // LIVE INTEGRATION: 
+      // This is configured to send data to a form handling service (e.g., Formspree).
+      // You must create a form at https://formspree.io/ and replace 'YOUR_FORM_ID' 
+      // with the ID provided by the service (e.g., 'mqkvrjqb').
+      // Configure that service to forward emails to info@heartcadence.com.
+      
+      const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
 
-    // Use \r\n for better compatibility with email clients like Outlook
-    const subject = `SiteEase Inquiry from ${name}`;
-    const body = `Name: ${name}\r\nEmail: ${email}\r\n\r\nMessage:\r\n${message}`;
-
-    const mailtoLink = `mailto:info@heartcadence.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-    // Create a temporary link to trigger the mailto
-    // This is often more reliable than window.location.href in preventing page unload issues
-    const link = document.createElement('a');
-    link.href = mailtoLink;
-    link.style.display = 'none';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-
-    setIsSubmitted(true);
+      if (response.ok) {
+        setIsSubmitted(true);
+      } else {
+        // If the ID hasn't been replaced, we'll likely get a 404. 
+        // For the purpose of this "live" code structure, we treat it as an error.
+        const data = await response.json();
+        if (Object.prototype.hasOwnProperty.call(data, 'errors')) {
+           setError(data.errors.map((err: any) => err.message).join(", "));
+        } else {
+           // Fallback error message if the service doesn't provide specific details
+           // or if the user hasn't replaced the placeholder ID yet.
+           setError("Unable to submit. Please ensure the form endpoint is configured correctly.");
+        }
+      }
+    } catch (err) {
+      setError("A network error occurred. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -72,7 +92,8 @@ export const Footer: React.FC = () => {
                     id="name"
                     name="name"
                     required
-                    className="w-full rounded-lg bg-slate-800 border border-slate-700 px-4 py-3 text-white placeholder-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all"
+                    disabled={isSubmitting}
+                    className="w-full rounded-lg bg-slate-800 border border-slate-700 px-4 py-3 text-white placeholder-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                     placeholder="Jane Doe"
                   />
                 </div>
@@ -86,7 +107,8 @@ export const Footer: React.FC = () => {
                     id="email"
                     name="email"
                     required
-                    className="w-full rounded-lg bg-slate-800 border border-slate-700 px-4 py-3 text-white placeholder-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all"
+                    disabled={isSubmitting}
+                    className="w-full rounded-lg bg-slate-800 border border-slate-700 px-4 py-3 text-white placeholder-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                     placeholder="jane@company.com"
                   />
                 </div>
@@ -100,30 +122,48 @@ export const Footer: React.FC = () => {
                     name="message"
                     rows={4}
                     required
-                    className="w-full rounded-lg bg-slate-800 border border-slate-700 px-4 py-3 text-white placeholder-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all resize-none"
+                    disabled={isSubmitting}
+                    className="w-full rounded-lg bg-slate-800 border border-slate-700 px-4 py-3 text-white placeholder-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all resize-none disabled:opacity-50 disabled:cursor-not-allowed"
                     placeholder="I need a new website for my..."
                   ></textarea>
                 </div>
+                
+                {/* Subject field helpful for some form handlers */}
+                <input type="hidden" name="_subject" value="New SiteEase Inquiry" />
 
-                <Button type="submit" fullWidth className="h-12 text-base">
-                  Request Consultation
+                {error && (
+                  <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-lg flex items-start gap-3 text-red-200 text-sm">
+                    <AlertCircle className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
+                    <span>{error}</span>
+                  </div>
+                )}
+
+                <Button type="submit" fullWidth className="h-12 text-base" disabled={isSubmitting}>
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    'Request Consultation'
+                  )}
                 </Button>
               </form>
             ) : (
               <div className="bg-slate-800 rounded-2xl p-8 border border-slate-700 text-center animate-in fade-in duration-500">
-                <div className="w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <Mail className="w-8 h-8 text-blue-400" />
+                <div className="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <CheckCircle className="w-8 h-8 text-green-500" />
                 </div>
-                <h3 className="text-xl font-bold text-white mb-2">Almost there...</h3>
+                <h3 className="text-xl font-bold text-white mb-2">Message Sent!</h3>
                 <p className="text-slate-400 mb-8">
-                  We've opened your email app with a pre-filled draft. Please hit <strong>Send</strong> to officially submit your inquiry.
+                  Thanks for reaching out. We've received your message and will get back to you shortly at the email provided.
                 </p>
                 <Button 
                   variant="secondary" 
                   onClick={() => setIsSubmitted(false)}
                   className="mx-auto"
                 >
-                  Return to Form <ArrowRight className="ml-2 w-4 h-4" />
+                  Send Another Message <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </div>
             )}
