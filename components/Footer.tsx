@@ -4,6 +4,19 @@ import { Button } from './Button';
 export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const name = formData.get('name') as string;
+    const email = formData.get('email') as string;
+    const message = formData.get('message') as string;
+
+    const subject = `SiteEase Inquiry from ${name}`;
+    const body = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
+
+    window.location.href = `mailto:info@heartcadence.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  };
+
   return (
     <footer className="bg-slate-900 text-white pt-16 pb-8 border-t border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -34,7 +47,7 @@ export const Footer: React.FC = () => {
 
           {/* Right Column: Contact Form */}
           <div className="bg-slate-900">
-            <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-slate-300 mb-2">
                   Full Name
@@ -43,6 +56,7 @@ export const Footer: React.FC = () => {
                   type="text"
                   id="name"
                   name="name"
+                  required
                   className="w-full rounded-lg bg-slate-800 border border-slate-700 px-4 py-3 text-white placeholder-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all"
                   placeholder="Jane Doe"
                 />
@@ -56,6 +70,7 @@ export const Footer: React.FC = () => {
                   type="email"
                   id="email"
                   name="email"
+                  required
                   className="w-full rounded-lg bg-slate-800 border border-slate-700 px-4 py-3 text-white placeholder-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all"
                   placeholder="jane@company.com"
                 />
@@ -69,6 +84,7 @@ export const Footer: React.FC = () => {
                   id="message"
                   name="message"
                   rows={4}
+                  required
                   className="w-full rounded-lg bg-slate-800 border border-slate-700 px-4 py-3 text-white placeholder-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all resize-none"
                   placeholder="I need a new website for my..."
                 ></textarea>
