@@ -34,7 +34,7 @@ export const Footer: React.FC = () => {
 
           {/* Right Column: Contact Form */}
           <div className="bg-slate-900">
-            <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+            <form className="space-y-6" action="mailto:info@heartcadence.com" method="post" encType="text/plain">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-slate-300 mb-2">
                   Full Name
@@ -45,6 +45,7 @@ export const Footer: React.FC = () => {
                   name="name"
                   className="w-full rounded-lg bg-slate-800 border border-slate-700 px-4 py-3 text-white placeholder-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all"
                   placeholder="Jane Doe"
+                  required
                 />
               </div>
 
@@ -58,6 +59,7 @@ export const Footer: React.FC = () => {
                   name="email"
                   className="w-full rounded-lg bg-slate-800 border border-slate-700 px-4 py-3 text-white placeholder-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all"
                   placeholder="jane@company.com"
+                  required
                 />
               </div>
 
@@ -71,6 +73,7 @@ export const Footer: React.FC = () => {
                   rows={4}
                   className="w-full rounded-lg bg-slate-800 border border-slate-700 px-4 py-3 text-white placeholder-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all resize-none"
                   placeholder="I need a new website for my..."
+                  required
                 ></textarea>
               </div>
 
