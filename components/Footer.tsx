@@ -13,38 +13,34 @@ export const Footer: React.FC = () => {
     setIsSubmitting(true);
     setError(null);
     
+    // Convert FormData to a plain JavaScript object
     const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData.entries());
     
     try {
-      // LIVE INTEGRATION: 
-      // This is configured to send data to a form handling service (e.g., Formspree).
-      // You must create a form at https://formspree.io/ and replace 'YOUR_FORM_ID' 
-      // with the ID provided by the service (e.g., 'mqkvrjqb').
-      // Configure that service to forward emails to info@heartcadence.com.
-      
-      const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+      // GOOGLE APPS SCRIPT INTEGRATION:
+      // Configured with the live Web App URL provided.
+      const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxdmPMg8DwlU85AShuMMPtxHflLem7gHJm0iJdvArnkkXEJsnii0l0FujM1XbVeON_S/exec';
+
+      // Note: We use "text/plain" to avoid CORS preflight checks which Google Apps Script
+      // does not handle well. The script must parse the body using JSON.parse(e.postData.contents).
+      const response = await fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
-        body: formData,
         headers: {
-          'Accept': 'application/json'
-        }
+          "Content-Type": "text/plain;charset=utf-8",
+        },
+        body: JSON.stringify(data),
       });
 
       if (response.ok) {
         setIsSubmitted(true);
       } else {
-        // If the ID hasn't been replaced, we'll likely get a 404. 
-        // For the purpose of this "live" code structure, we treat it as an error.
-        const data = await response.json();
-        if (Object.prototype.hasOwnProperty.call(data, 'errors')) {
-           setError(data.errors.map((err: any) => err.message).join(", "));
-        } else {
-           // Fallback error message if the service doesn't provide specific details
-           // or if the user hasn't replaced the placeholder ID yet.
-           setError("Unable to submit. Please ensure the form endpoint is configured correctly.");
-        }
+        setError("Unable to connect to the server. Please ensure the Google Script is deployed correctly.");
       }
     } catch (err) {
+      // In 'no-cors' scenarios or opaque responses, we might not get specific error details,
+      // but catching fetch errors helps handle network down states.
+      console.error(err);
       setError("A network error occurred. Please try again later.");
     } finally {
       setIsSubmitting(false);
@@ -127,9 +123,6 @@ export const Footer: React.FC = () => {
                     placeholder="I need a new website for my..."
                   ></textarea>
                 </div>
-                
-                {/* Subject field helpful for some form handlers */}
-                <input type="hidden" name="_subject" value="New SiteEase Inquiry" />
 
                 {error && (
                   <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-lg flex items-start gap-3 text-red-200 text-sm">
