@@ -81,7 +81,7 @@ export const Footer: React.FC = () => {
               <form className="space-y-6" onSubmit={handleSubmit}>
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-slate-300 mb-2">
-                    Full Name
+                    Full Name <span className="text-red-400" aria-hidden="true">*</span>
                   </label>
                   <input
                     type="text"
@@ -95,8 +95,22 @@ export const Footer: React.FC = () => {
                 </div>
 
                 <div>
+                  <label htmlFor="company" className="block text-sm font-medium text-slate-300 mb-2">
+                    Company Name <span className="text-slate-500 text-xs font-normal ml-1">(Optional)</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="company"
+                    name="company"
+                    disabled={isSubmitting}
+                    className="w-full rounded-lg bg-slate-800 border border-slate-700 px-4 py-3 text-white placeholder-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                    placeholder="Acme Corp"
+                  />
+                </div>
+
+                <div>
                   <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-2">
-                    Email Address
+                    Email Address <span className="text-red-400" aria-hidden="true">*</span>
                   </label>
                   <input
                     type="email"
@@ -110,8 +124,22 @@ export const Footer: React.FC = () => {
                 </div>
 
                 <div>
+                  <label htmlFor="phone" className="block text-sm font-medium text-slate-300 mb-2">
+                    Phone Number <span className="text-slate-500 text-xs font-normal ml-1">(Optional)</span>
+                  </label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    disabled={isSubmitting}
+                    className="w-full rounded-lg bg-slate-800 border border-slate-700 px-4 py-3 text-white placeholder-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                    placeholder="(555) 123-4567"
+                  />
+                </div>
+
+                <div>
                   <label htmlFor="message" className="block text-sm font-medium text-slate-300 mb-2">
-                    Tell us about your needs
+                    Tell us about your needs <span className="text-red-400" aria-hidden="true">*</span>
                   </label>
                   <textarea
                     id="message"
