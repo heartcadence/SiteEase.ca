@@ -60,6 +60,8 @@ export const Hero: React.FC = () => {
               width="600"
               height="600"
               loading="eager"
+              // @ts-ignore - fetchPriority is supported in React 18+ / browsers but types may vary
+              fetchPriority="high"
             />
           </div>
 
