@@ -54,9 +54,9 @@ export const Hero: React.FC = () => {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-blue-100 to-teal-50 rounded-full blur-3xl opacity-60 pointer-events-none"></div>
             
             <img 
-              src="https://picsum.photos/600/600" 
+              src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=800"
               alt="A business owner happily using a tablet while SiteEase manages their technical website needs in the background" 
-              className="relative rounded-2xl shadow-2xl border-4 border-white object-cover w-full max-w-md lg:max-w-full h-auto z-10"
+              className="relative rounded-2xl shadow-2xl border-4 border-white object-cover w-full max-w-md lg:max-w-full h-auto z-10 aspect-square"
               width="600"
               height="600"
               loading="eager"
