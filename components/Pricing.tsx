@@ -17,7 +17,7 @@ export const Pricing: React.FC = () => {
   };
 
   return (
-    <section id="pricing" className="py-24 bg-white" aria-labelledby="pricing-heading">
+    <section id="pricing" className="py-24 bg-slate-50" aria-labelledby="pricing-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-10">
           <h2 id="pricing-heading" className="text-3xl font-bold text-slate-900 sm:text-4xl mb-4">
@@ -30,12 +30,12 @@ export const Pricing: React.FC = () => {
 
         {/* Pricing Toggle */}
         <div className="flex justify-center mb-12">
-          <div className="bg-slate-100 p-1 rounded-xl inline-flex relative">
+          <div className="bg-white p-1 rounded-xl inline-flex relative shadow-sm border border-slate-200">
             <button
               onClick={() => setIsYearly(false)}
               className={`px-6 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 ${
                 !isYearly 
-                  ? 'bg-white text-slate-900 shadow-sm ring-1 ring-slate-200' 
+                  ? 'bg-slate-100 text-slate-900' 
                   : 'text-slate-500 hover:text-slate-900'
               }`}
               aria-pressed={!isYearly}
@@ -46,7 +46,7 @@ export const Pricing: React.FC = () => {
               onClick={() => setIsYearly(true)}
               className={`px-6 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 flex items-center gap-2 ${
                 isYearly 
-                  ? 'bg-white text-blue-600 shadow-sm ring-1 ring-slate-200' 
+                  ? 'bg-blue-50 text-blue-600' 
                   : 'text-slate-500 hover:text-slate-900'
               }`}
               aria-pressed={isYearly}

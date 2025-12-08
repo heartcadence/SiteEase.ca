@@ -5,7 +5,7 @@ import { NavLink } from '../types';
 
 const links: NavLink[] = [
   { label: 'Services', href: '#services' },
-  { label: 'How it Works', href: '#process' },
+  { label: 'Our Process', href: '#process' },
   { label: 'Pricing', href: '#pricing' },
 ];
 

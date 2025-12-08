@@ -31,9 +31,11 @@ export const Hero: React.FC = () => {
               <Button className="h-12 px-8 text-lg">
                 View Our Plans
               </Button>
-              <Button variant="secondary" className="h-12 px-8 text-lg">
-                How it Works
-              </Button>
+              <a href="#process" tabIndex={-1}>
+                <Button variant="secondary" className="h-12 px-8 text-lg w-full sm:w-auto">
+                  How it Works
+                </Button>
+              </a>
             </div>
 
             <div className="flex items-center gap-6 text-sm font-medium text-slate-500">
