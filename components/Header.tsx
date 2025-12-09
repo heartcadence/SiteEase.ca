@@ -53,9 +53,11 @@ export const Header: React.FC = () => {
                 {link.label}
               </a>
             ))}
-            <Button variant="primary" className="py-2 px-4 text-sm">
-              Get Started
-            </Button>
+            <a href="#contact" tabIndex={-1}>
+              <Button variant="primary" className="py-2 px-4 text-sm">
+                Get Started
+              </Button>
+            </a>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -89,9 +91,11 @@ export const Header: React.FC = () => {
               </a>
             ))}
             <div className="pt-4 pb-2">
-              <Button fullWidth onClick={() => setIsMenuOpen(false)}>
-                Get Started
-              </Button>
+              <a href="#contact" onClick={() => setIsMenuOpen(false)} className="block">
+                <Button fullWidth>
+                  Get Started
+                </Button>
+              </a>
             </div>
           </div>
         </div>
