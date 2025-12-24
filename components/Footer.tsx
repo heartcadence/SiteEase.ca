@@ -49,10 +49,10 @@ export const Footer: React.FC = () => {
           
           <div>
             <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl mb-6">
-              Ready to scale your digital presence?
+              Ready to get more customers through your door?
             </h2>
             <p className="text-lg text-slate-400 mb-8 max-w-lg leading-relaxed">
-              Start your Growth journey with SiteEase today. Fill out the form, and our onboarding specialist will contact you within 24 hours to begin your transition.
+              Start your journey with SiteEase today. Fill out the form and we’ll get back to you within 24 hours to talk about your new site.
             </p>
             
             <div className="space-y-4 text-slate-300">
@@ -143,7 +143,7 @@ export const Footer: React.FC = () => {
                       Sending...
                     </>
                   ) : (
-                    'Request Growth Plan Consultation'
+                    'Get My Free Quote'
                   )}
                 </Button>
               </form>
