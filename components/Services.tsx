@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { motion, Variants } from 'framer-motion';
 import { Cloud, Globe, ShieldCheck, RefreshCw, Zap } from 'lucide-react';
 import { ServiceItem } from '../types';
 
@@ -33,23 +34,72 @@ const features: ServiceItem[] = [
 ];
 
 export const Services: React.FC = () => {
+  const sentence = "Stop stressing over broken links and website hackers. SiteEase keeps your site safe and running smoothly with simple monthly plans that never surprise you.";
+  const words = sentence.split(" ");
+
+  // Added explicit Variants type to resolve type issues with transition properties
+  const containerVars: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.05,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  // Added explicit Variants type to avoid ease: number[] inference error
+  const wordVars: Variants = {
+    hidden: { 
+      opacity: 0, 
+      y: 20,
+    },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: [0.16, 1, 0.3, 1],
+      },
+    },
+  };
+
   return (
     <section id="services" className="py-24 bg-slate-50" aria-labelledby="services-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 id="services-heading" className="text-3xl font-bold text-slate-900 sm:text-4xl mb-4">
+          <h2 id="services-heading" className="text-3xl font-bold text-slate-900 sm:text-4xl mb-6">
             Scalable Web Solutions
           </h2>
-          <p className="text-lg text-slate-600">
-            Stop worrying about tech debt and security vulnerabilities. SiteEase provides the infrastructure for your digital Growth with simple, predictable tiers.
-          </p>
+          <motion.p 
+            variants={containerVars}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="text-lg text-slate-600 leading-relaxed"
+          >
+            {words.map((word, i) => (
+              <motion.span 
+                key={i} 
+                variants={wordVars} 
+                className="inline-block mr-[0.25em] last:mr-0"
+              >
+                {word}
+              </motion.span>
+            ))}
+          </motion.p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {features.map((feature) => (
-            <article 
+          {features.map((feature, idx) => (
+            <motion.article 
               key={feature.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.1, duration: 0.5 }}
               className={`group relative bg-white rounded-xl p-8 shadow-sm border transition-all duration-300 flex flex-col items-start ${
                 feature.highlight 
                   ? 'border-blue-200 ring-1 ring-blue-100 shadow-md hover:shadow-2xl hover:border-blue-400 hover:-translate-y-2' 
@@ -77,7 +127,7 @@ export const Services: React.FC = () => {
               <p className="text-slate-600 leading-relaxed text-sm flex-grow">
                 {feature.description}
               </p>
-            </article>
+            </motion.article>
           ))}
         </div>
 

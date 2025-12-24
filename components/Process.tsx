@@ -1,25 +1,25 @@
 
 import React from 'react';
-import { ClipboardList, PenTool, Rocket } from 'lucide-react';
+import { MessageSquare, Hammer, Sprout } from 'lucide-react';
 
 const steps = [
   {
     number: '01',
-    title: 'Choose Your Tier',
-    description: 'Select Launch for a strong start or Growth for unlimited updates and priority support. Transparent pricing, always.',
-    icon: ClipboardList
+    title: 'We Chat',
+    description: 'We talk about your goals and pick a simple plan that fits your budget. No hidden fees, just clear pricing from day one.',
+    icon: MessageSquare
   },
   {
     number: '02',
-    title: 'We Build & Scale',
-    description: 'Our team builds your fresh site structure or migrates existing assets, fully optimizing for speed and modern SEO.',
-    icon: PenTool
+    title: 'We Build',
+    description: 'Our team builds your professional new site or moves your old one over. We make sure it looks great on phones and helps customers find you.',
+    icon: Hammer
   },
   {
     number: '03',
-    title: 'Launch & Grow',
-    description: 'Your site goes live. We handle the security, maintenance, and updates while you focus on scaling your business.',
-    icon: Rocket
+    title: 'You Grow',
+    description: 'Once your site is live, we handle every update and security check. You stay focused on your customers; we’ll keep your name out there.',
+    icon: Sprout
   }
 ];
 
@@ -29,10 +29,10 @@ export const Process: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 id="process-heading" className="text-3xl font-bold text-slate-900 sm:text-4xl mb-4">
-            From Static to Dynamic in 3 Steps
+            From Outdated to Outstanding in 3 Steps
           </h2>
           <p className="text-lg text-slate-600">
-            We've removed the friction from high-end web management. Getting a professional, Growth-ready website is now as simple as a subscription.
+            We’ve taken the complexity out of high-end web design. Getting a professional, customer-ready website is now as simple as a single monthly plan.
           </p>
         </div>
 

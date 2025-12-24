@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from './Button';
 import { NavLink } from '../types';
@@ -11,26 +11,37 @@ const links: NavLink[] = [
 
 export const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-white/80 backdrop-blur-md border-b border-slate-200">
+    <header className={`sticky top-0 z-40 w-full transition-all duration-300 ${
+      isScrolled ? 'bg-[#020617]/95 backdrop-blur-md border-b border-white/10 shadow-lg' : 'bg-transparent'
+    }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
             <a href="#" className="flex items-center gap-2 group" aria-label="SiteEase Home">
-              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center group-hover:bg-blue-700 transition-colors">
+              <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center group-hover:bg-blue-500 transition-colors shadow-lg shadow-blue-500/20">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  strokeWidth="2"
+                  strokeWidth="2.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="w-5 h-5 text-white"
+                  className="w-6 h-6 text-white"
                   aria-hidden="true"
                 >
                   <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
@@ -38,23 +49,23 @@ export const Header: React.FC = () => {
                   <path d="M9 18h6" />
                 </svg>
               </div>
-              <span className="font-bold text-xl tracking-tight text-slate-900">SiteEase<span className="text-blue-600">.ca</span></span>
+              <span className="font-black text-2xl tracking-tighter text-white">SiteEase<span className="text-blue-500">.ca</span></span>
             </a>
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-8 items-center" aria-label="Main Navigation">
+          <nav className="hidden md:flex space-x-10 items-center" aria-label="Main Navigation">
             {links.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
-                className="text-slate-600 hover:text-blue-600 font-medium transition-colors text-sm"
+                className="text-white hover:text-blue-400 font-bold transition-colors text-sm uppercase tracking-widest"
               >
                 {link.label}
               </a>
             ))}
             <a href="#contact" tabIndex={-1}>
-              <Button variant="primary" className="py-2 px-4 text-sm">
+              <Button variant="primary" className="py-2.5 px-6 text-sm font-black bg-blue-600 hover:bg-blue-500">
                 Get Started
               </Button>
             </a>
@@ -64,13 +75,13 @@ export const Header: React.FC = () => {
           <div className="flex md:hidden">
             <button
               type="button"
-              className="text-slate-500 hover:text-slate-900 focus:outline-none"
+              className="text-white hover:text-blue-400 focus:outline-none"
               onClick={toggleMenu}
               aria-expanded={isMenuOpen}
               aria-controls="mobile-menu"
               aria-label="Toggle menu"
             >
-              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {isMenuOpen ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
             </button>
           </div>
         </div>
@@ -78,21 +89,21 @@ export const Header: React.FC = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden bg-white border-b border-slate-200" id="mobile-menu">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <div className="md:hidden bg-[#020617] border-b border-white/10" id="mobile-menu">
+          <div className="px-4 pt-2 pb-6 space-y-2">
             {links.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
-                className="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-blue-600 hover:bg-slate-50"
+                className="block px-3 py-3 rounded-xl text-lg font-bold text-white hover:text-blue-400 hover:bg-white/5"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {link.label}
               </a>
             ))}
-            <div className="pt-4 pb-2">
+            <div className="pt-4">
               <a href="#contact" onClick={() => setIsMenuOpen(false)} className="block">
-                <Button fullWidth>
+                <Button fullWidth className="h-14 text-lg font-black bg-blue-600">
                   Get Started
                 </Button>
               </a>

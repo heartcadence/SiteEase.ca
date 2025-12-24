@@ -9,7 +9,7 @@ import { CookieConsent } from './components/CookieConsent';
 
 function App() {
   return (
-    <div className="min-h-screen flex flex-col bg-white">
+    <div className="min-h-screen flex flex-col bg-[#020617]">
       {/* Skip to main content for accessibility */}
       <a 
         href="#main-content" 

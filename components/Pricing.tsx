@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Check, Info } from 'lucide-react';
 import { Button } from './Button';
@@ -21,10 +22,10 @@ export const Pricing: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-10">
           <h2 id="pricing-heading" className="text-3xl font-bold text-slate-900 sm:text-4xl mb-4">
-            Simple, Transparent WaaS Pricing
+            One Simple Monthly Price. No Hidden Fees.
           </h2>
           <p className="text-lg text-slate-600">
-            Choose the growth partner your business deserves. No hidden fees, cancel anytime.
+            Get a professional website that works as hard as you do. Choose the plan that fits your business goals—cancel or change anytime.
           </p>
         </div>
 
