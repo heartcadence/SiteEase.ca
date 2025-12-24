@@ -1,34 +1,34 @@
 
 import React from 'react';
 import { motion, Variants } from 'framer-motion';
-import { Cloud, Globe, ShieldCheck, RefreshCw, Zap } from 'lucide-react';
+import { Anchor, FolderCheck, ShieldAlert, HardHat, Zap } from 'lucide-react';
 import { ServiceItem } from '../types';
 
 const features: ServiceItem[] = [
   {
     id: 'hosting',
-    title: 'Managed Cloud Hosting',
-    description: 'Lightning-fast, secure hosting on Canadian edge servers. Optimized for peak performance and 99.9% uptime reliability without you lifting a finger.',
-    icon: Cloud
+    title: 'Rock-Solid Reliability',
+    description: "We keep your site online 24/7 on fast, secure Canadian servers. Your customers will never see a 'Site Down' page, and you won't have to lift a finger.",
+    icon: Anchor
   },
   {
     id: 'domain',
-    title: 'Domain Management',
-    description: 'We handle your DNS, renewals, and professional configurations. Your brand identity is fully managed while you maintain 100% ownership.',
-    icon: Globe
+    title: 'We Handle the Paperwork',
+    description: 'We take care of your web address, renewals, and setup. You keep 100% ownership of your brand name while we handle the technical registration.',
+    icon: FolderCheck
   },
   {
     id: 'security',
-    title: 'Security & Maintenance',
-    description: 'Malware removal guarantee, professional plugin management, and daily automated backups. We keep your Growth site secure 24/7.',
-    icon: ShieldCheck,
+    title: 'Total Digital Protection',
+    description: "We act as your site's security guard with daily backups and safety checks to keep hackers out and your business safe 24/7.",
+    icon: ShieldAlert,
     highlight: true
   },
   {
     id: 'updates',
-    title: 'Flexible Updates',
-    description: '30 mins of monthly updates for Launch plans or Unlimited Minor Content Updates for Growth plans. We grow as you grow.',
-    icon: RefreshCw,
+    title: 'Updates on Your Schedule',
+    description: 'Need to change a price or add a service? Just let us know. We handle the updates quickly so your site stays as current as your business.',
+    icon: HardHat,
     highlight: true
   }
 ];
@@ -115,7 +115,7 @@ export const Services: React.FC = () => {
               <div className={`p-4 rounded-xl mb-6 transition-colors duration-300 ${
                 feature.highlight 
                   ? 'bg-blue-600 text-white group-hover:bg-blue-700' 
-                  : 'bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white'
+                  : 'bg-blue-50 text-blue-500 group-hover:bg-blue-600 group-hover:text-white'
               }`}>
                 <feature.icon className="w-8 h-8" aria-hidden="true" />
               </div>
