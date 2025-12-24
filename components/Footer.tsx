@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Button } from './Button';
 import { CheckCircle, ArrowRight, Loader2, AlertCircle } from 'lucide-react';
@@ -13,17 +14,12 @@ export const Footer: React.FC = () => {
     setIsSubmitting(true);
     setError(null);
     
-    // Convert FormData to a plain JavaScript object
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
     
     try {
-      // GOOGLE APPS SCRIPT INTEGRATION:
-      // Configured with the live Web App URL provided.
       const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxdmPMg8DwlU85AShuMMPtxHflLem7gHJm0iJdvArnkkXEJsnii0l0FujM1XbVeON_S/exec';
 
-      // Note: We use "text/plain" to avoid CORS preflight checks which Google Apps Script
-      // does not handle well. The script must parse the body using JSON.parse(e.postData.contents).
       const response = await fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
         headers: {
@@ -38,8 +34,6 @@ export const Footer: React.FC = () => {
         setError("Unable to connect to the server. Please ensure the Google Script is deployed correctly.");
       }
     } catch (err) {
-      // In 'no-cors' scenarios or opaque responses, we might not get specific error details,
-      // but catching fetch errors helps handle network down states.
       console.error(err);
       setError("A network error occurred. Please try again later.");
     } finally {
@@ -51,16 +45,14 @@ export const Footer: React.FC = () => {
     <footer id="contact" className="bg-slate-900 text-white pt-16 pb-8 border-t border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Main Footer Content: Contact & Form */}
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 mb-16 items-start">
           
-          {/* Left Column: value prop & Contact Info */}
           <div>
             <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl mb-6">
-              Ready to simplify your web presence?
+              Ready to scale your digital presence?
             </h2>
             <p className="text-lg text-slate-400 mb-8 max-w-lg leading-relaxed">
-              Get started with SiteEase today. Fill out the form, and our onboarding specialist will contact you within 24 hours to begin your hassle-free journey.
+              Start your Growth journey with SiteEase today. Fill out the form, and our onboarding specialist will contact you within 24 hours to begin your transition.
             </p>
             
             <div className="space-y-4 text-slate-300">
@@ -75,7 +67,6 @@ export const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column: Contact Form */}
           <div className="bg-slate-900">
             {!isSubmitted ? (
               <form className="space-y-6" onSubmit={handleSubmit}>
@@ -124,20 +115,6 @@ export const Footer: React.FC = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-slate-300 mb-2">
-                    Phone Number <span className="text-slate-500 text-xs font-normal ml-1">(Optional)</span>
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    disabled={isSubmitting}
-                    className="w-full rounded-lg bg-slate-800 border border-slate-700 px-4 py-3 text-white placeholder-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                    placeholder="(555) 123-4567"
-                  />
-                </div>
-
-                <div>
                   <label htmlFor="message" className="block text-sm font-medium text-slate-300 mb-2">
                     Tell us about your needs <span className="text-red-400" aria-hidden="true">*</span>
                   </label>
@@ -166,7 +143,7 @@ export const Footer: React.FC = () => {
                       Sending...
                     </>
                   ) : (
-                    'Request Consultation'
+                    'Request Growth Plan Consultation'
                   )}
                 </Button>
               </form>
@@ -177,7 +154,7 @@ export const Footer: React.FC = () => {
                 </div>
                 <h3 className="text-xl font-bold text-white mb-2">Message Sent!</h3>
                 <p className="text-slate-400 mb-8">
-                  Thanks for reaching out. We've received your message and will get back to you shortly at the email provided.
+                  Thanks for reaching out. We've received your request and a Growth specialist will follow up shortly.
                 </p>
                 <Button 
                   variant="secondary" 
@@ -191,10 +168,8 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Divider */}
         <div className="border-t border-slate-800 my-8"></div>
 
-        {/* Bottom Bar: Legal & Copyright */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-500">
           <p>&copy; {currentYear} SiteEase.ca. All rights reserved.</p>
           <div className="flex flex-wrap justify-center gap-6">

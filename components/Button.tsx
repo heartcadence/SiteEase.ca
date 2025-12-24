@@ -13,7 +13,8 @@ export const Button: React.FC<ButtonProps> = ({
   const variants = {
     primary: "bg-blue-600 text-white hover:bg-blue-700 shadow-lg shadow-blue-900/20 active:translate-y-0.5",
     secondary: "bg-white text-slate-900 hover:bg-slate-50 border border-slate-200 shadow-sm active:bg-slate-100",
-    outline: "border-2 border-blue-600 text-blue-600 hover:bg-blue-50 active:bg-blue-100"
+    outline: "border-2 border-blue-600 text-blue-600 hover:bg-blue-50 active:bg-blue-100",
+    accent: "bg-orange-600 text-white hover:bg-orange-700 shadow-lg shadow-orange-900/20 active:translate-y-0.5"
   };
 
   const widthClass = fullWidth ? "w-full" : "";

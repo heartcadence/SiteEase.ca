@@ -1,23 +1,24 @@
+
 import React from 'react';
 import { ClipboardList, PenTool, Rocket } from 'lucide-react';
 
 const steps = [
   {
     number: '01',
-    title: 'Choose Your Plan',
-    description: 'Select the package that fits your business needs. No hidden fees, just simple transparent pricing.',
+    title: 'Choose Your Tier',
+    description: 'Select Launch for a strong start or Growth for unlimited updates and priority support. Transparent pricing, always.',
     icon: ClipboardList
   },
   {
     number: '02',
-    title: 'We Build & Optimize',
-    description: 'Our team migrates your existing content or builds a fresh structure, optimizing for speed and SEO.',
+    title: 'We Build & Scale',
+    description: 'Our team builds your fresh site structure or migrates existing assets, fully optimizing for speed and modern SEO.',
     icon: PenTool
   },
   {
     number: '03',
-    title: 'Launch & Relax',
-    description: 'We go live. From then on, we handle security, backups, and monthly updates while you focus on business.',
+    title: 'Launch & Grow',
+    description: 'Your site goes live. We handle the security, maintenance, and updates while you focus on scaling your business.',
     icon: Rocket
   }
 ];
@@ -28,10 +29,10 @@ export const Process: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 id="process-heading" className="text-3xl font-bold text-slate-900 sm:text-4xl mb-4">
-            From Chaos to Calm in 3 Steps
+            From Static to Dynamic in 3 Steps
           </h2>
           <p className="text-lg text-slate-600">
-            We've stripped away the complexity. Getting a professional, managed website is now as easy as subscribing to your favorite streaming service.
+            We've removed the friction from high-end web management. Getting a professional, Growth-ready website is now as simple as a subscription.
           </p>
         </div>
 

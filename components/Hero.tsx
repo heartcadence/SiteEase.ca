@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from './Button';
 import { CheckCircle } from 'lucide-react';
@@ -20,31 +21,33 @@ export const Hero: React.FC = () => {
             
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.15] mb-6">
               Focus on Your Business, <br/>
-              <span className="text-blue-600">We'll Handle Your Website.</span>
+              <span className="text-blue-600">We'll Handle Your Growth.</span>
             </h1>
             
             <p className="text-lg sm:text-xl text-slate-600 mb-8 leading-relaxed max-w-lg">
-              The premier <strong className="text-slate-900 font-semibold">Hassle-Free Website as a Service</strong> for Canadian SMBs. We design, host, and maintain your online presence so you don't have to.
+              The premier <strong className="text-slate-900 font-semibold">Growth-Driven Website as a Service</strong> for Canadian SMBs. We design, host, and scale your online presence so you don't have to.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-10">
-              <Button className="h-12 px-8 text-lg">
-                View Our Plans
-              </Button>
-              <a href="#process" tabIndex={-1}>
+              <a href="#pricing">
+                <Button className="h-12 px-8 text-lg w-full sm:w-auto">
+                  View Our Plans
+                </Button>
+              </a>
+              <a href="#process">
                 <Button variant="secondary" className="h-12 px-8 text-lg w-full sm:w-auto">
                   How it Works
                 </Button>
               </a>
             </div>
 
-            <div className="flex items-center gap-6 text-sm font-medium text-slate-500">
-              <div className="flex items-center gap-2">
-                <CheckCircle className="w-5 h-5 text-green-500" />
-                <span>No setup fees</span>
+            <div className="flex items-center gap-6 text-sm font-medium text-slate-50">
+              <div className="flex items-center gap-2 px-3 py-1 bg-slate-900 rounded-full">
+                <CheckCircle className="w-4 h-4 text-green-400" />
+                <span>Zero setup fees</span>
               </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle className="w-5 h-5 text-green-500" />
+              <div className="flex items-center gap-2 px-3 py-1 bg-slate-900 rounded-full">
+                <CheckCircle className="w-4 h-4 text-green-400" />
                 <span>Cancel anytime</span>
               </div>
             </div>
@@ -57,13 +60,11 @@ export const Hero: React.FC = () => {
             
             <img 
               src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=800"
-              alt="A business owner happily using a tablet while SiteEase manages their technical website needs in the background" 
+              alt="A business owner scaling their digital reach while SiteEase manages their technical needs" 
               className="relative rounded-2xl shadow-2xl border-4 border-white object-cover w-full max-w-md lg:max-w-full h-auto z-10 aspect-square"
               width="600"
               height="600"
               loading="eager"
-              // @ts-ignore - fetchPriority is supported in React 18+ / browsers but types may vary
-              fetchPriority="high"
             />
           </div>
 

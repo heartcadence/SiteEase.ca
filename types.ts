@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { LucideIcon } from 'lucide-react';
 
@@ -6,6 +7,7 @@ export interface ServiceItem {
   description: string;
   icon: LucideIcon;
   id: string;
+  highlight?: boolean;
 }
 
 export interface NavLink {
@@ -14,6 +16,6 @@ export interface NavLink {
 }
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'outline';
+  variant?: 'primary' | 'secondary' | 'outline' | 'accent';
   fullWidth?: boolean;
 }
