@@ -119,7 +119,7 @@ export const Hero: React.FC = () => {
                   </div>
                 ))}
               </div>
-              <span>Trusted by Canadian SMBs</span>
+              <span>Trusted by Canadian businesses</span>
             </motion.div>
           </div>
 
