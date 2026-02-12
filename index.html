@@ -2,6 +2,29 @@
 <!DOCTYPE html>
 <html lang="en-CA">
   <head>
+    <!-- Google Ads Tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-CONVERSION_ID"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'AW-CONVERSION_ID');
+
+      // Utility function to track subscription leads
+      // Callable from React components via window.trackSubscriptionLead()
+      window.trackSubscriptionLead = function() {
+        if (typeof gtag === 'function') {
+          gtag('event', 'conversion', {
+              'send_to': 'AW-CONVERSION_ID/SUBMISSION'
+          });
+          console.debug('Google Ads Conversion Triggered: SUBMISSION');
+        } else {
+          console.warn('Google Ads tag not initialized');
+        }
+      }
+    </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SiteEase | Canada's Subscription Web Design Agency</title>

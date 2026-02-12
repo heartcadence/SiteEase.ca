@@ -15,6 +15,19 @@ export const Pricing: React.FC = () => {
     }
   };
 
+  const handlePlanSelect = (planName: string) => {
+    // 1. Trigger Google Ads Conversion
+    if (typeof window !== 'undefined' && (window as any).trackSubscriptionLead) {
+      (window as any).trackSubscriptionLead();
+    }
+
+    // 2. Smooth Scroll to Contact Section
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section id="pricing" className="py-24 bg-slate-50" aria-labelledby="pricing-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -55,7 +68,12 @@ export const Pricing: React.FC = () => {
               ))}
             </ul>
 
-            <Button variant="secondary" fullWidth className="mt-auto">
+            <Button 
+              variant="secondary" 
+              fullWidth 
+              className="mt-auto"
+              onClick={() => handlePlanSelect('Launch')}
+            >
               Start Launching
             </Button>
           </div>
@@ -97,7 +115,12 @@ export const Pricing: React.FC = () => {
               <div className="flex items-center justify-center gap-1 text-[10px] text-slate-400 mb-3 uppercase tracking-widest font-bold">
                 <Info className="w-3 h-3" /> Zero setup fees
               </div>
-              <Button variant="accent" fullWidth className="py-4 text-lg">
+              <Button 
+                variant="accent" 
+                fullWidth 
+                className="py-4 text-lg"
+                onClick={() => handlePlanSelect('Growth')}
+              >
                 Go Unlimited Growth
               </Button>
             </div>
