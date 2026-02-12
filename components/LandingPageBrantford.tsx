@@ -25,7 +25,7 @@ export const LandingPageBrantford: React.FC = () => {
       
       {/* 1. COMPACT HEADER - Distraction Free */}
       <nav className="h-16 flex items-center justify-center border-b border-white/5 bg-[#020617]/80 backdrop-blur-md sticky top-0 z-50">
-        <div className="flex items-center gap-2">
+        <a href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity" aria-label="Back to Homepage">
           <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center shadow-lg shadow-blue-500/20">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -41,7 +41,7 @@ export const LandingPageBrantford: React.FC = () => {
             </svg>
           </div>
           <span className="font-black text-xl tracking-tighter text-white">SiteEase<span className="text-blue-500">.ca</span></span>
-        </div>
+        </a>
       </nav>
 
       {/* 2. SPLIT-SCREEN HERO (The Conversion Engine) */}
