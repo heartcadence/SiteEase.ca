@@ -10,19 +10,39 @@ import { CookieConsent } from './components/CookieConsent';
 import { LandingPageBrantford } from './components/LandingPageBrantford';
 
 function App() {
-  const [currentPath, setCurrentPath] = useState(window.location.hash);
+  const [isOfferPage, setIsOfferPage] = useState(false);
 
   useEffect(() => {
-    const handleHashChange = () => {
-      setCurrentPath(window.location.hash);
+    const checkRoute = () => {
+      const hash = window.location.hash;
+      const path = window.location.pathname;
+      
+      // Support both hash (legacy/internal) and pathname (Ads/SEO) routing
+      const isOffer = 
+        hash === '#offer' || 
+        hash === '#/offer' || 
+        path === '/offer' || 
+        path.endsWith('/offer');
+
+      setIsOfferPage(isOffer);
     };
 
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    // Check on initial load
+    checkRoute();
+
+    // Listen for hash changes (internal navigation)
+    window.addEventListener('hashchange', checkRoute);
+    
+    // Listen for history changes (if using pushState in the future)
+    window.addEventListener('popstate', checkRoute);
+
+    return () => {
+      window.removeEventListener('hashchange', checkRoute);
+      window.removeEventListener('popstate', checkRoute);
+    };
   }, []);
 
-  // Simple Hash Router Logic
-  if (currentPath === '#offer' || currentPath === '#/offer') {
+  if (isOfferPage) {
     return <LandingPageBrantford />;
   }
 
