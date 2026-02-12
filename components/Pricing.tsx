@@ -67,4 +67,43 @@ export const Pricing: React.FC = () => {
             </div>
             
             <div className="mb-6">
-              <h3 className
+              <h3 className="text-xl font-bold text-slate-900">Growth</h3>
+              <div className="mt-4 flex items-baseline">
+                <span className="text-5xl font-bold tracking-tight text-slate-900">
+                  ${plans.growth.price}
+                </span>
+                <span className="ml-1 text-xl font-semibold text-slate-500">/mo</span>
+              </div>
+            </div>
+
+            <ul className="space-y-4 mb-8 flex-1">
+              {[
+                'Everything in Launch',
+                'Priority Hosting Tier',
+                'Real-time Security Monitoring',
+                'Unlimited Minor Content Updates',
+                'Malware Removal Guarantee',
+                'Monthly SEO & Performance Report',
+                'Priority Email & Phone Support'
+              ].map((feature) => (
+                <li key={feature} className="flex items-start">
+                  <Check className="h-5 w-5 text-blue-600 shrink-0 mr-3" />
+                  <span className="text-sm text-slate-600 font-medium">{feature}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-auto">
+              <div className="flex items-center justify-center gap-1 text-[10px] text-slate-400 mb-3 uppercase tracking-widest font-bold">
+                <Info className="w-3 h-3" /> Zero setup fees
+              </div>
+              <Button variant="accent" fullWidth className="py-4 text-lg">
+                Go Unlimited Growth
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
