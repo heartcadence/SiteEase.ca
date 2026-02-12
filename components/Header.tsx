@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from './Button';
@@ -64,6 +65,11 @@ export const Header: React.FC = () => {
                 {link.label}
               </a>
             ))}
+             {/* Special Offer Link for Demo */}
+             <a href="#/offer" className="text-green-400 hover:text-green-300 font-bold text-sm uppercase tracking-widest border border-green-500/30 px-3 py-1 rounded-full bg-green-500/10">
+                Brantford Offer
+            </a>
+
             <a href="#contact" tabIndex={-1}>
               <Button variant="primary" className="py-2.5 px-6 text-sm font-black bg-blue-600 hover:bg-blue-500">
                 Get Started
@@ -101,6 +107,9 @@ export const Header: React.FC = () => {
                 {link.label}
               </a>
             ))}
+            <a href="#/offer" onClick={() => setIsMenuOpen(false)} className="block px-3 py-3 rounded-xl text-lg font-bold text-green-400 hover:bg-white/5">
+                View Brantford Offer
+            </a>
             <div className="pt-4">
               <a href="#contact" onClick={() => setIsMenuOpen(false)} className="block">
                 <Button fullWidth className="h-14 text-lg font-black bg-blue-600">
