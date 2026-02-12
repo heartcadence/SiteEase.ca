@@ -281,6 +281,32 @@ export const LandingPageBrantford: React.FC = () => {
         </div>
       </section>
 
+      {/* 6. FINAL CTA (Matched to Screenshot) */}
+      <section className="py-20 px-4 bg-white text-center border-t border-slate-100">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-3xl font-bold text-slate-900 mb-4">Invest in your business, not a website.</h2>
+          <p className="text-lg text-slate-600 mb-10">
+            Join the smart business owners in Brantford who switched to SiteEase.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Button 
+              className="h-14 px-8 text-lg font-bold bg-blue-600 hover:bg-blue-500 shadow-xl shadow-blue-500/20"
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            >
+              Get My Free Quote
+            </Button>
+            
+            <a 
+              href="tel:5195771449"
+              className="group flex items-center justify-center h-14 px-8 rounded-lg border border-slate-200 text-slate-900 font-bold hover:bg-slate-50 hover:border-slate-300 transition-all"
+            >
+              <Phone className="w-5 h-5 mr-3 text-slate-400 group-hover:text-slate-600" />
+              (519) 577-1449
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* FOOTER - Minimal */}
       <footer className="py-8 bg-white border-t border-slate-200 text-center text-sm text-slate-400">
         <p>&copy; {new Date().getFullYear()} SiteEase.ca. <span className="hidden sm:inline">Made in Ontario.</span></p>
