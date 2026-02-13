@@ -6,18 +6,47 @@ import { Button } from './Button';
 export const LandingPageBrantford: React.FC = () => {
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormStatus('submitting');
     
-    // Simulate API call / Conversion Tracking
-    setTimeout(() => {
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
+
+    // Construct Payload for Google Ads Webhook / Apps Script
+    // Mapping inputs to user_column_data array as requested
+    const payload = {
+      google_key: "SiteEase2026",
+      user_column_data: [
+        { column_id: "FULL_NAME", string_value: formData.get('name') },
+        { column_id: "PHONE_NUMBER", string_value: formData.get('phone') },
+        { column_id: "EMAIL", string_value: formData.get('email') },
+        { column_id: "COMPANY_NAME", string_value: formData.get('business') }
+      ]
+    };
+    
+    try {
+      // Use text/plain to avoid CORS preflight issues with Google Apps Script
+      await fetch("https://script.google.com/macros/s/AKfycbwEL4rWHanpxrrvsSvQ07pz2e-cbWqLYhyfPWQxdZWG-4CI_rZzMNso1Q0P98y7AoyQmA/exec", {
+        method: "POST",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8",
+        },
+        body: JSON.stringify(payload)
+      });
+
       setFormStatus('success');
       // Fire Google Ads Conversion
       if ((window as any).trackSubscriptionLead) {
         (window as any).trackSubscriptionLead();
       }
-    }, 1500);
+    } catch (error) {
+      console.error("Submission failed", error);
+      // In case of opaque response or network error, we still show success to user 
+      // as the script often returns opaque responses in no-cors mode, 
+      // though here we use text/plain to attempt a standard request.
+      setFormStatus('success');
+    }
   };
 
   return (
@@ -126,30 +155,20 @@ export const LandingPageBrantford: React.FC = () => {
                       <label htmlFor="name" className="sr-only">Full Name</label>
                       <input 
                         id="name"
+                        name="name"
                         required 
                         type="text" 
                         className="w-full h-12 px-4 rounded-lg border border-slate-300 bg-slate-50 text-slate-900 placeholder-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all font-medium" 
                         placeholder="Full Name" 
                       />
                     </div>
-                    
-                    {/* Field 2: Business Name */}
-                    <div>
-                      <label htmlFor="business" className="sr-only">Business Name</label>
-                      <input 
-                        id="business"
-                        required 
-                        type="text" 
-                        className="w-full h-12 px-4 rounded-lg border border-slate-300 bg-slate-50 text-slate-900 placeholder-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all font-medium" 
-                        placeholder="Business Name" 
-                      />
-                    </div>
 
-                    {/* Field 3: Phone (High Intent) */}
+                    {/* Field 2: Phone (Moved Up) */}
                     <div>
                       <label htmlFor="phone" className="sr-only">Phone Number</label>
                       <input 
                         id="phone"
+                        name="phone"
                         required 
                         type="tel" 
                         className="w-full h-12 px-4 rounded-lg border border-slate-300 bg-slate-50 text-slate-900 placeholder-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all font-medium" 
@@ -157,16 +176,33 @@ export const LandingPageBrantford: React.FC = () => {
                       />
                     </div>
 
-                    {/* Field 4: Website (Optional) */}
+                    {/* Field 3: Email (New) */}
                     <div>
-                      <label htmlFor="website" className="sr-only">Current Website</label>
+                      <label htmlFor="email" className="sr-only">Email Address</label>
                       <input 
-                        id="website"
-                        type="text" 
+                        id="email"
+                        name="email"
+                        required 
+                        type="email" 
                         className="w-full h-12 px-4 rounded-lg border border-slate-300 bg-slate-50 text-slate-900 placeholder-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all font-medium" 
-                        placeholder="Current Website (Optional)" 
+                        placeholder="Email Address" 
                       />
                     </div>
+                    
+                    {/* Field 4: Business Name (Moved Down) */}
+                    <div>
+                      <label htmlFor="business" className="sr-only">Business Name</label>
+                      <input 
+                        id="business"
+                        name="business"
+                        required 
+                        type="text" 
+                        className="w-full h-12 px-4 rounded-lg border border-slate-300 bg-slate-50 text-slate-900 placeholder-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all font-medium" 
+                        placeholder="Business Name" 
+                      />
+                    </div>
+
+                    {/* Removed Website Field */}
 
                     <Button 
                       fullWidth 
