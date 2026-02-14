@@ -35,13 +35,22 @@ export const LandingPageBrantford: React.FC = () => {
         body: JSON.stringify(payload)
       });
 
-      // Redirect to Thank You Page on success
-      window.location.hash = '/thank-you';
+      // GA4 Tracking: Trigger 'generate_lead' event immediately before redirect
+      if (typeof window !== 'undefined' && (window as any).gtag) {
+        (window as any).gtag('event', 'generate_lead', {
+          'event_category': 'form',
+          'event_label': 'brantford_offer_submission'
+        });
+      }
+
+      // Immediate Redirect to Thank You Page
+      // Using href ensures we navigate away from the current path effectively
+      window.location.href = '/thank-you';
       
     } catch (error) {
       console.error("Submission failed", error);
-      // Even if fetch fails (e.g. CORS opaqueness), we assume success for the user flow
-      window.location.hash = '/thank-you';
+      // Fallback: Ensure redirect happens even if fetch fails/timeouts
+      window.location.href = '/thank-you';
     }
   };
 
