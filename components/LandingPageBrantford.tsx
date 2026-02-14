@@ -4,7 +4,7 @@ import { Check, Star, MapPin, Lock, Phone, ArrowRight, ShieldCheck } from 'lucid
 import { Button } from './Button';
 
 export const LandingPageBrantford: React.FC = () => {
-  const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
+  const [formStatus, setFormStatus] = useState<'idle' | 'submitting'>('idle');
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,17 +35,13 @@ export const LandingPageBrantford: React.FC = () => {
         body: JSON.stringify(payload)
       });
 
-      setFormStatus('success');
-      // Fire Google Ads Conversion
-      if ((window as any).trackSubscriptionLead) {
-        (window as any).trackSubscriptionLead();
-      }
+      // Redirect to Thank You Page on success
+      window.location.hash = '/thank-you';
+      
     } catch (error) {
       console.error("Submission failed", error);
-      // In case of opaque response or network error, we still show success to user 
-      // as the script often returns opaque responses in no-cors mode, 
-      // though here we use text/plain to attempt a standard request.
-      setFormStatus('success');
+      // Even if fetch fails (e.g. CORS opaqueness), we assume success for the user flow
+      window.location.hash = '/thank-you';
     }
   };
 
@@ -137,86 +133,71 @@ export const LandingPageBrantford: React.FC = () => {
                   <p className="text-slate-500 text-sm">See if your business qualifies for our Brantford launch program.</p>
                 </div>
 
-                {formStatus === 'success' ? (
-                  <div className="bg-green-50 rounded-xl p-8 text-center border border-green-200 animate-in fade-in zoom-in duration-300">
-                    <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <Check className="w-8 h-8" />
-                    </div>
-                    <h4 className="text-xl font-bold text-slate-900 mb-2">Request Received!</h4>
-                    <p className="text-slate-600 text-sm mb-4">Our local team will review your details and text you shortly.</p>
-                    <Button variant="outline" className="text-slate-900 border-slate-300 hover:bg-slate-50" onClick={() => window.location.reload()}>
-                      Start New Quote
-                    </Button>
+                <form onSubmit={handleFormSubmit} className="space-y-4">
+                  {/* Field 1: Name */}
+                  <div>
+                    <label htmlFor="name" className="sr-only">Full Name</label>
+                    <input 
+                      id="name"
+                      name="name"
+                      required 
+                      type="text" 
+                      className="w-full h-12 px-4 rounded-lg border border-slate-300 bg-slate-50 text-slate-900 placeholder-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all font-medium" 
+                      placeholder="Full Name" 
+                    />
                   </div>
-                ) : (
-                  <form onSubmit={handleFormSubmit} className="space-y-4">
-                    {/* Field 1: Name */}
-                    <div>
-                      <label htmlFor="name" className="sr-only">Full Name</label>
-                      <input 
-                        id="name"
-                        name="name"
-                        required 
-                        type="text" 
-                        className="w-full h-12 px-4 rounded-lg border border-slate-300 bg-slate-50 text-slate-900 placeholder-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all font-medium" 
-                        placeholder="Full Name" 
-                      />
-                    </div>
 
-                    {/* Field 2: Phone (Moved Up) */}
-                    <div>
-                      <label htmlFor="phone" className="sr-only">Phone Number</label>
-                      <input 
-                        id="phone"
-                        name="phone"
-                        required 
-                        type="tel" 
-                        className="w-full h-12 px-4 rounded-lg border border-slate-300 bg-slate-50 text-slate-900 placeholder-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all font-medium" 
-                        placeholder="Phone Number (Best for text)" 
-                      />
-                    </div>
+                  {/* Field 2: Phone (Moved Up) */}
+                  <div>
+                    <label htmlFor="phone" className="sr-only">Phone Number</label>
+                    <input 
+                      id="phone"
+                      name="phone"
+                      required 
+                      type="tel" 
+                      className="w-full h-12 px-4 rounded-lg border border-slate-300 bg-slate-50 text-slate-900 placeholder-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all font-medium" 
+                      placeholder="Phone Number (Best for text)" 
+                    />
+                  </div>
 
-                    {/* Field 3: Email (New) */}
-                    <div>
-                      <label htmlFor="email" className="sr-only">Email Address</label>
-                      <input 
-                        id="email"
-                        name="email"
-                        required 
-                        type="email" 
-                        className="w-full h-12 px-4 rounded-lg border border-slate-300 bg-slate-50 text-slate-900 placeholder-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all font-medium" 
-                        placeholder="Email Address" 
-                      />
-                    </div>
-                    
-                    {/* Field 4: Business Name (Moved Down) */}
-                    <div>
-                      <label htmlFor="business" className="sr-only">Business Name</label>
-                      <input 
-                        id="business"
-                        name="business"
-                        required 
-                        type="text" 
-                        className="w-full h-12 px-4 rounded-lg border border-slate-300 bg-slate-50 text-slate-900 placeholder-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all font-medium" 
-                        placeholder="Business Name" 
-                      />
-                    </div>
+                  {/* Field 3: Email (New) */}
+                  <div>
+                    <label htmlFor="email" className="sr-only">Email Address</label>
+                    <input 
+                      id="email"
+                      name="email"
+                      required 
+                      type="email" 
+                      className="w-full h-12 px-4 rounded-lg border border-slate-300 bg-slate-50 text-slate-900 placeholder-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all font-medium" 
+                      placeholder="Email Address" 
+                    />
+                  </div>
+                  
+                  {/* Field 4: Business Name (Moved Down) */}
+                  <div>
+                    <label htmlFor="business" className="sr-only">Business Name</label>
+                    <input 
+                      id="business"
+                      name="business"
+                      required 
+                      type="text" 
+                      className="w-full h-12 px-4 rounded-lg border border-slate-300 bg-slate-50 text-slate-900 placeholder-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all font-medium" 
+                      placeholder="Business Name" 
+                    />
+                  </div>
 
-                    {/* Removed Website Field */}
+                  <Button 
+                    fullWidth 
+                    className="h-14 text-lg font-black bg-blue-600 hover:bg-blue-500 text-white shadow-xl shadow-blue-600/30 transform transition-all active:scale-[0.98]"
+                  >
+                    {formStatus === 'submitting' ? 'Checking Eligibility...' : 'Check My Eligibility Now'}
+                  </Button>
 
-                    <Button 
-                      fullWidth 
-                      className="h-14 text-lg font-black bg-blue-600 hover:bg-blue-500 text-white shadow-xl shadow-blue-600/30 transform transition-all active:scale-[0.98]"
-                    >
-                      {formStatus === 'submitting' ? 'Checking Eligibility...' : 'Check My Eligibility Now'}
-                    </Button>
-
-                    <div className="flex items-center justify-center gap-2 text-[11px] text-slate-400 mt-4">
-                      <Lock className="w-3 h-3" />
-                      <span>Secure SSL. No spam guarantee.</span>
-                    </div>
-                  </form>
-                )}
+                  <div className="flex items-center justify-center gap-2 text-[11px] text-slate-400 mt-4">
+                    <Lock className="w-3 h-3" />
+                    <span>Secure SSL. No spam guarantee.</span>
+                  </div>
+                </form>
               </div>
               
               {/* Mobile Only Trust Signals (Shown below form on mobile) */}

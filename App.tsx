@@ -8,23 +8,26 @@ import { Pricing } from './components/Pricing';
 import { Footer } from './components/Footer';
 import { CookieConsent } from './components/CookieConsent';
 import { LandingPageBrantford } from './components/LandingPageBrantford';
+import { ThankYou } from './components/ThankYou';
+
+type PageRoute = 'home' | 'offer' | 'thank-you';
 
 function App() {
-  const [isOfferPage, setIsOfferPage] = useState(false);
+  const [currentPage, setCurrentPage] = useState<PageRoute>('home');
 
   useEffect(() => {
     const checkRoute = () => {
       const hash = window.location.hash;
       const path = window.location.pathname;
       
-      // Support both hash (legacy/internal) and pathname (Ads/SEO) routing
-      const isOffer = 
-        hash === '#offer' || 
-        hash === '#/offer' || 
-        path === '/offer' || 
-        path.endsWith('/offer');
-
-      setIsOfferPage(isOffer);
+      // Determine current page based on hash or path
+      if (hash === '#offer' || hash === '#/offer' || path === '/offer' || path.endsWith('/offer')) {
+        setCurrentPage('offer');
+      } else if (hash === '#thank-you' || hash === '#/thank-you' || path === '/thank-you' || path.endsWith('/thank-you')) {
+        setCurrentPage('thank-you');
+      } else {
+        setCurrentPage('home');
+      }
     };
 
     // Check on initial load
@@ -42,8 +45,12 @@ function App() {
     };
   }, []);
 
-  if (isOfferPage) {
+  if (currentPage === 'offer') {
     return <LandingPageBrantford />;
+  }
+
+  if (currentPage === 'thank-you') {
+    return <ThankYou />;
   }
 
   return (
