@@ -55,9 +55,14 @@
     <link rel="modulepreload" href="./index.tsx" />
     
     <!-- Compiled CSS (Replaces CDN) -->
-    <link href="./style.css" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
     
     <style>
+      /* System Font Stack - Prioritizing Calibri for performance (0ms latency) */
+      body {
+        font-family: Calibri, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      }
+      
       /* Ensure focus indicators are high contrast for accessibility */
       :focus-visible {
         outline: 3px solid #3b82f6; 

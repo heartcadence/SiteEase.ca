@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "High-performance marketing website for SiteEase.",
   "scripts": {
-    "build": "tailwindcss -i ./input.css -o ./style.css --minify"
+    "build": "mkdir -p dist && tailwindcss -i ./input.css -o ./dist/style.css --minify && cp index.html dist/ && cp -r components types.ts *.tsx dist/"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.19",
