@@ -5,14 +5,31 @@ import { Button } from './Button';
 
 export const ThankYou: React.FC = () => {
   useEffect(() => {
-    // GA4 Tracking: Trigger 'generate_lead' event on mount
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'generate_lead', {
-        currency: "CAD",
-        value: 0
-      });
-      console.debug('GA4 Event Triggered: generate_lead');
-    }
+    let attempts = 0;
+    const maxAttempts = 10;
+
+    const triggerEvent = () => {
+      // Check if gtag is available on the window object
+      if (typeof window !== 'undefined' && (window as any).gtag) {
+        (window as any).gtag('event', 'generate_lead', {
+          currency: "CAD",
+          value: 1.00,
+          debug_mode: true
+        });
+        console.log('GA4 Success: generate_lead event fired');
+      } else {
+        // Retry logic
+        if (attempts < maxAttempts) {
+          attempts++;
+          console.warn(`GA4 Retry: gtag not found, attempt ${attempts}/${maxAttempts}`);
+          setTimeout(triggerEvent, 500);
+        } else {
+          console.error('GA4 Failed: gtag not found after maximum attempts');
+        }
+      }
+    };
+
+    triggerEvent();
   }, []);
 
   return (
