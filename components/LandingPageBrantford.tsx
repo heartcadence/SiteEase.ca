@@ -226,12 +226,15 @@ export const LandingPageBrantford: React.FC = () => {
       {/* 3. SOCIAL PROOF BAR (Reinforcement) */}
       <section className="py-8 border-y border-white/5 bg-slate-900/50">
         <div className="max-w-7xl mx-auto px-4 text-center">
-          <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-4">Trusted by Ontario Businesses</p>
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
-            <div className="font-black text-lg text-white flex items-center gap-2"><div className="w-5 h-5 bg-white rounded-sm"></div> GRAND RIVER</div>
-            <div className="font-black text-lg text-white flex items-center gap-2"><div className="w-5 h-5 bg-white rounded-sm"></div> BRANT AUTO</div>
-            <div className="font-black text-lg text-white flex items-center gap-2"><div className="w-5 h-5 bg-white rounded-sm"></div> ELITE LANDSCAPING</div>
-            <div className="font-black text-lg text-white flex items-center gap-2"><div className="w-5 h-5 bg-white rounded-sm"></div> TWIN CITY HVAC</div>
+          <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-4">Trusted by Ontario Businesses in:</p>
+          <div className="flex flex-wrap justify-center items-center gap-4 opacity-60">
+            <span className="text-xl md:text-2xl font-black text-slate-300">Brantford</span>
+            <span className="text-slate-600 text-xl md:text-2xl font-light mx-2">|</span>
+            <span className="text-xl md:text-2xl font-black text-slate-300">Hamilton</span>
+            <span className="text-slate-600 text-xl md:text-2xl font-light mx-2">|</span>
+            <span className="text-xl md:text-2xl font-black text-slate-300">Cambridge</span>
+            <span className="text-slate-600 text-xl md:text-2xl font-light mx-2">|</span>
+            <span className="text-xl md:text-2xl font-black text-slate-300">Paris</span>
           </div>
         </div>
       </section>
