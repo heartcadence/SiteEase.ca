@@ -52,26 +52,16 @@
     }
     </script>
 
-    <!-- Performance Optimizations -->
-    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin />
-    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com" />
     <link rel="modulepreload" href="./index.tsx" />
     
-    <!-- Use specific version to avoid 302 Redirect latency -->
-    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <!-- Compiled CSS (Replaces CDN) -->
+    <link href="./style.css" rel="stylesheet" />
     
     <style>
       /* Ensure focus indicators are high contrast for accessibility */
       :focus-visible {
         outline: 3px solid #3b82f6; 
         outline-offset: 2px;
-      }
-      body {
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-      }
-      /* Rugged headings */
-      h1, h2 {
-        letter-spacing: -0.02em;
       }
     </style>
   </head>
