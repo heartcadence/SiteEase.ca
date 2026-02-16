@@ -6,12 +6,12 @@
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-PCF6NS7M');</script>
+    
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-CONVERSION_ID"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'AW-CONVERSION_ID');
 
       window.trackSubscriptionLead = function() {
@@ -63,13 +63,14 @@
     </script>
     
     <style>
-      /* 1. R2 FONT RECOVERY (Fixed CORS via Absolute URL) */
+      /* 1. ROOT-RELATIVE FONT RECOVERY (Bypasses CORS Security Block) */
+      /* Changed from absolute siteease.ca to root-relative /fonts/ to stop net::ERR_FAILED */
       @font-face {
         font-family: 'Inter';
         font-style: normal;
         font-weight: 400;
         font-display: swap;
-        src: url('https://siteease.ca/fonts/inter-v20-latin-regular.woff2') format('woff2');
+        src: url('/fonts/inter-v20-latin-regular.woff2') format('woff2');
       }
 
       @font-face {
@@ -77,10 +78,10 @@
         font-style: normal;
         font-weight: 700;
         font-display: swap;
-        src: url('https://siteease.ca/fonts/inter-v20-latin-700.woff2') format('woff2');
+        src: url('/fonts/inter-v20-latin-700.woff2') format('woff2');
       }
 
-      /* 2. DESKTOP GRID LOCK (Stops SVG Overlap) */
+      /* 2. DESKTOP GRID LOCK (Ensures Text and SVG do not overlap) */
       @media (min-width: 1024px) {
         .lg\:grid-cols-2 {
           display: grid !important;
@@ -92,7 +93,7 @@
         }
       }
 
-      /* 3. TYPOGRAPHY (Fixes "Focusonyourbusiness" clumping) */
+      /* 3. TYPOGRAPHY (Restores tracking to fix letter clumping) */
       .leading-\[1\.05\] {
         line-height: 1.05 !important;
       }
