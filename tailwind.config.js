@@ -4,8 +4,7 @@ module.exports = {
     "./index.html",
     "./index.tsx",
     "./App.tsx",
-    "./types.ts",
-    "./components/**/*.{ts,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -22,13 +21,8 @@ module.exports = {
           'Arial',
           '"Noto Sans"',
           'sans-serif',
-          '"Apple Color Emoji"',
-          '"Segoe UI Emoji"',
-          '"Segoe UI Symbol"',
-          '"Noto Color Emoji"',
         ],
       },
-      // Explicitly supporting the specific leading and tracking used in the Hero section
       lineHeight: {
         'hero': '1.05',
       },
