@@ -9,7 +9,7 @@ export const ThankYou: React.FC = () => {
     const maxAttempts = 10;
 
     const triggerEvent = () => {
-      // Check if gtag is available on the window objects
+      // Check if gtag is available on the window object
       if (typeof window !== 'undefined' && (window as any).gtag) {
         (window as any).gtag('event', 'generate_lead', {
           currency: "CAD",
