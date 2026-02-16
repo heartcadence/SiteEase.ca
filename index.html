@@ -53,52 +53,10 @@
     </script>
 
     <!-- Performance Optimizations -->
-    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin />
-    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com" />
     <link rel="modulepreload" href="./index.tsx" />
     
-    <!-- Use specific version to avoid 302 Redirect latency -->
-    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-            },
-          },
-        },
-      }
-    </script>
-    
-    <style>
-      @font-face {
-        font-family: 'Inter';
-        font-style: normal;
-        font-weight: 400;
-        font-display: swap;
-        src: url('https://siteease.ca/fonts/inter-v20-latin-regular.woff2') format('woff2');
-      }
-
-      @font-face {
-        font-family: 'Inter';
-        font-style: normal;
-        font-weight: 700;
-        font-display: swap;
-        src: url('https://siteease.ca/fonts/inter-v20-latin-700.woff2') format('woff2');
-      }
-
-      /* Ensure focus indicators are high contrast for accessibility */
-      :focus-visible {
-        outline: 3px solid #3b82f6; 
-        outline-offset: 2px;
-      }
-      
-      /* Rugged headings */
-      h1, h2 {
-        letter-spacing: -0.02em;
-      }
-    </style>
+    <!-- CSS (Includes R2 hosted fonts and Tailwind directives) -->
+    <link rel="stylesheet" href="./globals.css" />
   </head>
   <body class="bg-[#020617] text-slate-100 antialiased selection:bg-blue-500/30 selection:text-white">
     <!-- Google Tag Manager (noscript) -->
