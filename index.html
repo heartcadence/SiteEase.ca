@@ -1,19 +1,26 @@
+
 <!DOCTYPE html>
 <html lang="en-CA">
   <head>
+    <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-PCF6NS7M');</script>
-    
+    <!-- End Google Tag Manager -->
+
+    <!-- Google Ads Tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-CONVERSION_ID"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
+
       gtag('config', 'AW-CONVERSION_ID');
 
+      // Utility function to track subscription leads
+      // Callable from React components via window.trackSubscriptionLead()
       window.trackSubscriptionLead = function() {
         if (typeof gtag === 'function') {
           gtag('event', 'conversion', {
@@ -30,7 +37,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SiteEase | Canada's Subscription Web Design Agency</title>
     <meta name="description" content="Professional, growth-focused website services for Canadian Small to Medium Businesses. Hosting, domain, backups, and unlimited updates included." />
-    
+    <!-- SVG Favicon: Blue rounded square with white house icon (Matches Header) -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%232563EB'/%3E%3Cg stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' fill='none'%3E%3Cpath d='M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z' /%3E%3Cpath d='M9 14h6' /%3E%3Cpath d='M9 18h6' /%3E%3C/g%3E%3C/svg%3E" />
     
     <script type="importmap">
@@ -45,14 +52,12 @@
     }
     </script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-
+    <!-- Performance Optimizations -->
     <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin />
     <link rel="dns-prefetch" href="https://cdn.tailwindcss.com" />
     <link rel="modulepreload" href="./index.tsx" />
     
+    <!-- Tailwind Play CDN -->
     <script src="https://cdn.tailwindcss.com/3.4.17"></script>
     <script>
       tailwind.config = {
@@ -66,42 +71,41 @@
       }
     </script>
     
+    <!-- Self-hosted Fonts (R2) -->
     <style>
-      /* 2. DESKTOP GRID LOCK (Prevents icon/text overlap) */
-      @media (min-width: 1024px) {
-        .lg\:grid-cols-2 {
-          display: grid !important;
-          grid-template-columns: repeat(2, 1fr) !important;
-          align-items: center !important;
-        }
-        .lg\:gap-16 {
-          gap: 4rem !important;
-        }
+      @font-face {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url('https://siteease.ca/fonts/inter-v20-latin-regular.woff2') format('woff2');
       }
 
-      /* 3. TYPOGRAPHY (Fixes letter clumping) */
-      .leading-\[1\.05\] {
-        line-height: 1.05 !important;
-      }
-      .tracking-tight {
-        letter-spacing: -0.025em !important;
+      @font-face {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: url('https://siteease.ca/fonts/inter-v20-latin-700.woff2') format('woff2');
       }
 
-      /* Accessibility & UI Helpers */
+      /* Ensure focus indicators are high contrast for accessibility */
       :focus-visible {
         outline: 3px solid #3b82f6; 
         outline-offset: 2px;
       }
       
+      /* Typography Tweaks */
       h1, h2 {
         letter-spacing: -0.02em;
-        font-family: 'Inter', sans-serif !important;
       }
     </style>
   </head>
   <body class="bg-[#020617] text-slate-100 antialiased selection:bg-blue-500/30 selection:text-white">
+    <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PCF6NS7M"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <div id="root"></div>
     <script type="module" src="./index.tsx"></script>
   </body>
