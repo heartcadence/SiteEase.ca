@@ -4,16 +4,16 @@
 
 /* 
   SiteEase | Senior Web Performance Engineer Production CSS
-  Target: Localized Assets, Layout Stability & Design Synchronization
+  Target: Layout Stability, Font Performance & Design Synchronization
 */
 
-/* 1. LOCALIZED FONTS (Performance Optimized) */
+/* 1. LOCALIZED FONTS (Relative Paths to resolve CORS & Cache Issues) */
 @font-face {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
-  font-display: swap; /* Prevent FOIT */
-  src: url('/fonts/inter-v20-latin-regular.woff2') format('woff2');
+  font-display: swap; /* Performance optimization for FOIT */
+  src: url('/fonts/inter-v20-latin-regular.woff2?v=2') format('woff2');
 }
 
 @font-face {
@@ -21,10 +21,10 @@
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: url('/fonts/inter-v20-latin-700.woff2') format('woff2');
+  src: url('/fonts/inter-v20-latin-700.woff2?v=2') format('woff2');
 }
 
-/* 2. CORE RESETS & PREFLIGHT */
+/* 2. CORE PREFLIGHT RESETS */
 *, ::before, ::after {
   box-sizing: border-box;
   border-width: 0;
@@ -50,61 +50,58 @@ body {
   min-height: 100vh;
 }
 
-/* 3. TYPOGRAPHY (Fixes Clumping & Readability) */
+/* 3. TYPOGRAPHY (Fixes "Focusonyourbusiness" Clumping) */
 h1, h2, h3, h4, h5, h6, p {
   margin: 0;
 }
 
-/* Standard Tailwind Spacing Values */
 .tracking-tight { letter-spacing: -0.025em; }
 .tracking-tighter { letter-spacing: -0.05em; }
 .tracking-widest { letter-spacing: 0.1em; }
 
 .leading-\[1\.05\] { line-height: 1.05; }
-.leading-\[1\.1\] { line-height: 1.1; }
 .leading-relaxed { line-height: 1.625; }
+.leading-tight { line-height: 1.25; }
 
-/* 4. LAYOUT & GRID ENGINE (Fixes SVG Overlap) */
+/* 4. LAYOUT & GRID UTILITIES (Fixes SVG/Text Overlap) */
 .max-w-7xl { max-width: 80rem; }
-.max-w-4xl { max-width: 56rem; }
 .mx-auto { margin-left: auto; margin-right: auto; }
-
 .flex { display: flex; }
 .grid { display: grid; }
 .hidden { display: none; }
 .relative { position: relative; }
+.absolute { position: absolute; }
+.inset-0 { inset: 0px; }
 .z-10 { z-index: 10; }
 
-/* Spacing & Gap Utilities */
-.gap-4 { gap: 1rem; }
+/* Spacing Engine */
 .gap-5 { gap: 1.25rem; }
 .gap-8 { gap: 2rem; }
-.gap-16 { gap: 4rem; }
-.mb-6 { margin-bottom: 1.5rem; }
+.gap-16 { gap: 4rem; } /* Ensures proper clearance for assets */
 .mb-8 { margin-bottom: 2rem; }
 .mb-12 { margin-bottom: 3rem; }
 .mt-12 { margin-top: 3rem; }
 
-/* 5. RESPONSIVE VARIANTS (sm, md, lg) */
+/* 5. RESPONSIVE VARIANTS */
 
 /* Large Screens (lg: 1024px) */
 @media (min-width: 1024px) {
   .lg\:flex { display: flex; }
   .lg\:hidden { display: none; }
+  
+  /* GRID LOGIC: Prevents Overlapping Elements */
   .lg\:grid-cols-2 { 
     grid-template-columns: repeat(2, minmax(0, 1fr)); 
     align-items: center;
   }
+  
   .lg\:text-left { text-align: left; }
   .lg\:text-7xl { font-size: 4.5rem; line-height: 1.05; }
   .lg\:justify-start { justify-content: flex-start; }
   .lg\:mx-0 { margin-left: 0; margin-right: 0; }
   .lg\:min-h-\[calc\(100vh-64px\)\] { min-height: calc(100vh - 64px); }
-  .lg\:gap-16 { gap: 4rem; }
-  .lg\:order-1 { order: 1; }
-  .lg\:order-2 { order: 2; }
   
-  /* Critical SVG Fix: Maintain column integrity */
+  /* Asset Container Constraint */
   .lg\:flex .relative.z-10 {
     max-width: 100%;
     width: 450px;
@@ -121,12 +118,10 @@ h1, h2, h3, h4, h5, h6, p {
 /* Small Screens (sm: 640px) */
 @media (min-width: 640px) {
   .sm\:flex-row { flex-direction: row; }
-  .sm\:text-4xl { font-size: 2.25rem; }
-  .sm\:text-5xl { font-size: 3rem; }
-  .sm\:text-6xl { font-size: 3.75rem; line-height: 1; }
+  .sm\:text-6xl { font-size: 3.75rem; }
 }
 
-/* 6. ACCESSIBILITY UTILITIES */
+/* 6. ACCESSIBILITY & ANIMATION */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -149,4 +144,14 @@ h1, h2, h3, h4, h5, h6, p {
   clip: auto;
   white-space: normal;
   z-index: 50;
+}
+
+.animate-ping {
+  animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+@keyframes ping {
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
+  }
 }
