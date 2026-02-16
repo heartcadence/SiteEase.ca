@@ -45,6 +45,10 @@
     }
     </script>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+
     <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin />
     <link rel="dns-prefetch" href="https://cdn.tailwindcss.com" />
     <link rel="modulepreload" href="./index.tsx" />
@@ -63,25 +67,7 @@
     </script>
     
     <style>
-      /* 1. ROOT-RELATIVE FONT RECOVERY (Bypasses CORS Security Block) */
-      /* Changed from absolute siteease.ca to root-relative /fonts/ to stop net::ERR_FAILED */
-      @font-face {
-        font-family: 'Inter';
-        font-style: normal;
-        font-weight: 400;
-        font-display: swap;
-        src: url('/fonts/inter-v20-latin-regular.woff2') format('woff2');
-      }
-
-      @font-face {
-        font-family: 'Inter';
-        font-style: normal;
-        font-weight: 700;
-        font-display: swap;
-        src: url('/fonts/inter-v20-latin-700.woff2') format('woff2');
-      }
-
-      /* 2. DESKTOP GRID LOCK (Ensures Text and SVG do not overlap) */
+      /* 2. DESKTOP GRID LOCK (Prevents icon/text overlap) */
       @media (min-width: 1024px) {
         .lg\:grid-cols-2 {
           display: grid !important;
@@ -93,7 +79,7 @@
         }
       }
 
-      /* 3. TYPOGRAPHY (Restores tracking to fix letter clumping) */
+      /* 3. TYPOGRAPHY (Fixes letter clumping) */
       .leading-\[1\.05\] {
         line-height: 1.05 !important;
       }
@@ -109,6 +95,7 @@
       
       h1, h2 {
         letter-spacing: -0.02em;
+        font-family: 'Inter', sans-serif !important;
       }
     </style>
   </head>
