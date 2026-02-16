@@ -1,20 +1,14 @@
 
-import React, { useEffect, useState, lazy, Suspense } from 'react';
-
-// Statically Import: Protect LCP and initial paint
+import React, { useEffect, useState } from 'react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
+import { Services } from './components/Services';
+import { Process } from './components/Process';
+import { Pricing } from './components/Pricing';
+import { Footer } from './components/Footer';
 import { CookieConsent } from './components/CookieConsent';
-
-// Lazy Load: Below-the-fold sections for main thread performance
-const Services = lazy(() => import('./components/Services').then(module => ({ default: module.Services })));
-const Process = lazy(() => import('./components/Process').then(module => ({ default: module.Process })));
-const Pricing = lazy(() => import('./components/Pricing').then(module => ({ default: module.Pricing })));
-const Footer = lazy(() => import('./components/Footer').then(module => ({ default: module.Footer })));
-
-// Route Splitting: Page-level lazy loading
-const LandingPageBrantford = lazy(() => import('./components/LandingPageBrantford').then(module => ({ default: module.LandingPageBrantford })));
-const ThankYou = lazy(() => import('./components/ThankYou').then(module => ({ default: module.ThankYou })));
+import { LandingPageBrantford } from './components/LandingPageBrantford';
+import { ThankYou } from './components/ThankYou';
 
 type PageRoute = 'home' | 'offer' | 'thank-you';
 
@@ -26,6 +20,7 @@ function App() {
       const hash = window.location.hash;
       const path = window.location.pathname;
       
+      // Determine current page based on hash or path
       if (hash === '#offer' || hash === '#/offer' || path === '/offer' || path.endsWith('/offer')) {
         setCurrentPage('offer');
       } else if (hash === '#thank-you' || hash === '#/thank-you' || path === '/thank-you' || path.endsWith('/thank-you')) {
@@ -35,8 +30,13 @@ function App() {
       }
     };
 
+    // Check on initial load
     checkRoute();
+
+    // Listen for hash changes (internal navigation)
     window.addEventListener('hashchange', checkRoute);
+    
+    // Listen for history changes (if using pushState in the future)
     window.addEventListener('popstate', checkRoute);
 
     return () => {
@@ -45,21 +45,12 @@ function App() {
     };
   }, []);
 
-  // Handle Route-level rendering with Suspense
   if (currentPage === 'offer') {
-    return (
-      <Suspense fallback={null}>
-        <LandingPageBrantford />
-      </Suspense>
-    );
+    return <LandingPageBrantford />;
   }
 
   if (currentPage === 'thank-you') {
-    return (
-      <Suspense fallback={null}>
-        <ThankYou />
-      </Suspense>
-    );
+    return <ThankYou />;
   }
 
   return (
@@ -76,19 +67,12 @@ function App() {
       
       <main id="main-content" className="flex-grow">
         <Hero />
-        
-        {/* Suspense boundary for below-the-fold components reduces main thread blocking during hydration */}
-        <Suspense fallback={null}>
-          <Services />
-          <Process />
-          <Pricing />
-        </Suspense>
+        <Services />
+        <Process />
+        <Pricing />
       </main>
 
-      <Suspense fallback={null}>
-        <Footer />
-      </Suspense>
-      
+      <Footer />
       <CookieConsent />
     </div>
   );
