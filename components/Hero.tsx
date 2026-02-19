@@ -1,38 +1,8 @@
 import React from 'react';
-import { motion, Variants } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Button } from './Button';
-import { ChevronRight } from 'lucide-react';
 
 export const Hero: React.FC = () => {
-  const headline = "Focus on your business, we'll handle your growth.";
-  const words = headline.split(" ");
-
-  const containerVars: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.08,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const wordVars: Variants = {
-    hidden: { 
-      opacity: 0, 
-      y: 40,
-    },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: [0.16, 1, 0.3, 1],
-      },
-    },
-  };
-
   return (
     <section className="relative min-h-[90vh] flex items-center bg-[#020617] overflow-hidden pt-20 pb-12" aria-label="Hero Section">
       <div className="absolute inset-0 z-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(#3b82f6 0.5px, transparent 0.5px)', backgroundSize: '24px 24px' }}></div>
@@ -43,51 +13,24 @@ export const Hero: React.FC = () => {
           
           {/* Text Content */}
           <div className="text-center lg:text-left">
-            <motion.div 
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 text-blue-400 text-xs font-black uppercase tracking-widest mb-8 border border-blue-500/20"
-            >
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 text-blue-400 text-xs font-black uppercase tracking-widest mb-8 border border-blue-500/20">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
               </span>
               Built for Canadian Businesses
-            </motion.div>
+            </div>
             
-            <motion.h1 
-              variants={containerVars}
-              initial="hidden"
-              animate="visible"
-              className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-[1.05] tracking-tight mb-8"
-            >
-              {words.map((word, i) => (
-                <motion.span 
-                  key={i} 
-                  variants={wordVars} 
-                  className="inline-block mr-[0.2em] last:mr-0 last:text-blue-500"
-                >
-                  {word}
-                </motion.span>
-              ))}
-            </motion.h1>
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-[1.05] tracking-tight mb-8">
+              Focus on your business, we'll handle your{' '}
+              <span className="text-blue-500">growth.</span>
+            </h1>
             
-            <motion.p 
-              initial={{ opacity: 0, filter: 'blur(10px)', y: 20 }}
-              animate={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
-              transition={{ delay: 1, duration: 0.8, ease: "easeOut" }}
-              className="text-xl sm:text-2xl text-slate-300 mb-12 max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium"
-            >
+            <p className="text-xl sm:text-2xl text-slate-300 mb-12 max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium">
               We manage the tech so the right customers find you.
-            </motion.p>
+            </p>
 
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.3, duration: 0.6 }}
-              className="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start"
-            >
+            <div className="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start">
               <a href="#contact">
                 <Button variant="accent" className="h-16 px-10 text-xl font-black rounded-xl bg-blue-500 hover:bg-blue-600 shadow-2xl shadow-blue-500/20">
                   Start My Site
@@ -98,13 +41,13 @@ export const Hero: React.FC = () => {
                   How It Works
                 </Button>
               </a>
-            </motion.div>
+            </div>
 
             {/* Social Proof Mini */}
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 1.8 }}
+              transition={{ delay: 0.3 }}
               className="mt-12 flex items-center justify-center lg:justify-start gap-4 text-slate-400 text-sm font-bold uppercase tracking-widest"
             >
               <div className="flex -space-x-2">
