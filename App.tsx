@@ -47,6 +47,19 @@ function App() {
     };
   }, []);
 
+  // Ensure page starts at top on initial load (override hash/default scroll)
+  React.useEffect(() => {
+    // Run after browser's default handling so we reliably land at the top
+    requestAnimationFrame(() => {
+      try {
+        window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      } catch (e) {
+        // fallback for older browsers
+        window.scrollTo(0, 0);
+      }
+    });
+  }, []);
+
   if (currentPage === 'offer') {
     return (
       <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-[#020617]"><div className="text-white">Loading...</div></div>}>
