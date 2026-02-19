@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion, Variants } from 'framer-motion';
 import { Button } from './Button';
@@ -8,8 +7,6 @@ export const Hero: React.FC = () => {
   const headline = "Focus on your business, we'll handle your growth.";
   const words = headline.split(" ");
 
-  // Animation variants for the H1 staggered reveal
-  // Added explicit Variants type to avoid ease: number[] inference error
   const containerVars: Variants = {
     hidden: { opacity: 0 },
     visible: {
@@ -21,7 +18,6 @@ export const Hero: React.FC = () => {
     },
   };
 
-  // Added explicit Variants type to avoid ease: number[] inference error
   const wordVars: Variants = {
     hidden: { 
       opacity: 0, 
@@ -32,14 +28,13 @@ export const Hero: React.FC = () => {
       y: 0,
       transition: {
         duration: 0.8,
-        ease: [0.16, 1, 0.3, 1], // Custom Power4.out equivalent
+        ease: [0.16, 1, 0.3, 1],
       },
     },
   };
 
   return (
     <section className="relative min-h-[90vh] flex items-center bg-[#020617] overflow-hidden pt-20 pb-12" aria-label="Hero Section">
-      {/* Background Grid Pattern for texture */}
       <div className="absolute inset-0 z-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(#3b82f6 0.5px, transparent 0.5px)', backgroundSize: '24px 24px' }}></div>
       <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none"></div>
 
@@ -114,8 +109,13 @@ export const Hero: React.FC = () => {
             >
               <div className="flex -space-x-2">
                 {[1, 2, 3].map(i => (
-                  <div key={i} className="w-8 h-8 rounded-full border-2 border-[#020617] bg-slate-800 flex items-center justify-center text-[10px] text-white overflow-hidden">
-                    <img src={`https://i.pravatar.cc/100?img=${i+10}`} alt="User" />
+                  <div key={i} className="w-8 h-8 rounded-full border-2 border-[#020617] overflow-hidden">
+                    <img
+                      src={`/images/avatar${i}.webp`}
+                      alt="Canadian business owner"
+                      width={32}
+                      height={32}
+                    />
                   </div>
                 ))}
               </div>
@@ -137,24 +137,17 @@ export const Hero: React.FC = () => {
               }}
               className="relative z-10 w-[450px] h-[450px]"
             >
-              {/* Custom SVG Claymorphic Toolbox/Site Icon */}
               <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full drop-shadow-[0_35px_35px_rgba(59,130,246,0.3)]">
-                {/* Main Body */}
                 <rect x="40" y="60" width="120" height="100" rx="20" fill="#3b82f6" />
                 <rect x="40" y="60" width="120" height="100" rx="20" fill="url(#clayGradient)" />
-                {/* Highlights */}
                 <ellipse cx="70" cy="85" rx="15" ry="8" fill="white" fillOpacity="0.2" />
-                {/* Handle */}
                 <path d="M70 60V45C70 36.7157 76.7157 30 85 30H115C123.284 30 130 36.7157 130 45V60" stroke="#3b82f6" strokeWidth="12" strokeLinecap="round" />
-                {/* Latches */}
                 <rect x="60" y="100" width="15" height="25" rx="4" fill="#1d4ed8" />
                 <rect x="125" y="100" width="15" height="25" rx="4" fill="#1d4ed8" />
-                {/* Tools emerging */}
                 <motion.path 
                   animate={{ y: [0, -10, 0] }}
                   transition={{ duration: 4, repeat: Infinity }}
                   d="M90 70L90 40M110 70L110 40" stroke="white" strokeWidth="8" strokeLinecap="round" />
-                
                 <defs>
                   <linearGradient id="clayGradient" x1="40" y1="60" x2="160" y2="160" gradientUnits="userSpaceOnUse">
                     <stop stopColor="white" stopOpacity="0.1" />
@@ -163,7 +156,6 @@ export const Hero: React.FC = () => {
                 </defs>
               </svg>
 
-              {/* Orbital Elements */}
               <motion.div 
                 animate={{ rotate: 360 }}
                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
@@ -173,14 +165,12 @@ export const Hero: React.FC = () => {
               </motion.div>
             </motion.div>
 
-            {/* Backdrop Blur Circle */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-blue-500/10 rounded-full blur-[80px] -z-10"></div>
           </div>
 
         </div>
       </div>
 
-      {/* Bottom Slope/Transition */}
       <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-slate-50 to-transparent"></div>
     </section>
   );
