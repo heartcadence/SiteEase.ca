@@ -1,14 +1,16 @@
 
-import React, { useEffect, useState } from 'react';
-import { Header } from './components/Header';
+import React, { useEffect, useState, Suspense } from 'react';
 import { Hero } from './components/Hero';
-import { Services } from './components/Services';
-import { Process } from './components/Process';
-import { Pricing } from './components/Pricing';
-import { Footer } from './components/Footer';
-import { CookieConsent } from './components/CookieConsent';
-import { LandingPageBrantford } from './components/LandingPageBrantford';
-import { ThankYou } from './components/ThankYou';
+
+// Lazy load all other components
+const Header = React.lazy(() => import('./components/Header').then(m => ({ default: m.Header })));
+const Services = React.lazy(() => import('./components/Services').then(m => ({ default: m.Services })));
+const Process = React.lazy(() => import('./components/Process').then(m => ({ default: m.Process })));
+const Pricing = React.lazy(() => import('./components/Pricing').then(m => ({ default: m.Pricing })));
+const Footer = React.lazy(() => import('./components/Footer').then(m => ({ default: m.Footer })));
+const CookieConsent = React.lazy(() => import('./components/CookieConsent').then(m => ({ default: m.CookieConsent })));
+const LandingPageBrantford = React.lazy(() => import('./components/LandingPageBrantford').then(m => ({ default: m.LandingPageBrantford })));
+const ThankYou = React.lazy(() => import('./components/ThankYou').then(m => ({ default: m.ThankYou })));
 
 type PageRoute = 'home' | 'offer' | 'thank-you';
 
@@ -46,11 +48,19 @@ function App() {
   }, []);
 
   if (currentPage === 'offer') {
-    return <LandingPageBrantford />;
+    return (
+      <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-[#020617]"><div className="text-white">Loading...</div></div>}>
+        <LandingPageBrantford />
+      </Suspense>
+    );
   }
 
   if (currentPage === 'thank-you') {
-    return <ThankYou />;
+    return (
+      <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-[#020617]"><div className="text-white">Loading...</div></div>}>
+        <ThankYou />
+      </Suspense>
+    );
   }
 
   return (
@@ -63,17 +73,29 @@ function App() {
         Skip to main content
       </a>
 
-      <Header />
+      <Suspense fallback={<div className="h-16 bg-[#020617]" />}>
+        <Header />
+      </Suspense>
       
       <main id="main-content" className="flex-grow">
         <Hero />
-        <Services />
-        <Process />
-        <Pricing />
+        <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="text-white">Loading...</div></div>}>
+          <Services />
+        </Suspense>
+        <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="text-white">Loading...</div></div>}>
+          <Process />
+        </Suspense>
+        <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="text-white">Loading...</div></div>}>
+          <Pricing />
+        </Suspense>
       </main>
 
-      <Footer />
-      <CookieConsent />
+      <Suspense fallback={<div className="h-16 bg-slate-900" />}>
+        <Footer />
+      </Suspense>
+      <Suspense fallback={null}>
+        <CookieConsent />
+      </Suspense>
     </div>
   );
 }
