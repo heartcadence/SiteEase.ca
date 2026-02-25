@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { motion, Variants } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Anchor, FolderCheck, ShieldAlert, HardHat, Zap } from 'lucide-react';
 import { ServiceItem } from '../types';
 
@@ -33,35 +33,8 @@ const features: ServiceItem[] = [
   }
 ];
 
-// Hoisted to module scope — these are pure constants, no need to recreate per render
-const SENTENCE = "Stop stressing over broken links and website hackers. SiteEase keeps your site safe and running smoothly with simple monthly plans that never surprise you.";
-const WORDS = SENTENCE.split(" ");
-
-const containerVars: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.05,
-      delayChildren: 0.1,
-    },
-  },
-};
-
-const wordVars: Variants = {
-  hidden: {
-    opacity: 0,
-    y: 20,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: [0.16, 1, 0.3, 1],
-    },
-  },
-};
+// Subtitle text — plain constant, no animation
+const SUBTITLE = "Stop stressing over broken links and website hackers. SiteEase keeps your site safe and running smoothly with simple monthly plans that never surprise you.";
 
 export const Services: React.FC = () => {
 
@@ -73,23 +46,9 @@ export const Services: React.FC = () => {
           <h2 id="services-heading" className="text-3xl font-bold text-slate-900 sm:text-4xl mb-6">
             Scalable Web Solutions
           </h2>
-          <motion.p
-            variants={containerVars}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            className="text-lg text-slate-600 leading-relaxed"
-          >
-            {WORDS.map((word, i) => (
-              <motion.span
-                key={i}
-                variants={wordVars}
-                className="inline-block mr-[0.25em] last:mr-0"
-              >
-                {word}
-              </motion.span>
-            ))}
-          </motion.p>
+          <p className="text-lg text-slate-600 leading-relaxed">
+            {SUBTITLE}
+          </p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -101,8 +60,8 @@ export const Services: React.FC = () => {
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1, duration: 0.5 }}
               className={`group relative bg-white rounded-xl p-8 shadow-sm border transition-all duration-300 flex flex-col items-start ${feature.highlight
-                  ? 'border-blue-200 ring-1 ring-blue-100 shadow-md hover:shadow-2xl hover:border-blue-400 hover:-translate-y-2'
-                  : 'border-slate-100 hover:shadow-xl hover:border-slate-200 hover:-translate-y-1'
+                ? 'border-blue-200 ring-1 ring-blue-100 shadow-md hover:shadow-2xl hover:border-blue-400 hover:-translate-y-2'
+                : 'border-slate-100 hover:shadow-xl hover:border-slate-200 hover:-translate-y-1'
                 }`}
             >
               {feature.highlight && (
@@ -112,8 +71,8 @@ export const Services: React.FC = () => {
               )}
 
               <div className={`p-4 rounded-xl mb-6 transition-colors duration-300 ${feature.highlight
-                  ? 'bg-blue-600 text-white group-hover:bg-blue-700'
-                  : 'bg-blue-50 text-blue-500 group-hover:bg-blue-600 group-hover:text-white'
+                ? 'bg-blue-600 text-white group-hover:bg-blue-700'
+                : 'bg-blue-50 text-blue-500 group-hover:bg-blue-600 group-hover:text-white'
                 }`}>
                 <feature.icon className="w-8 h-8" aria-hidden="true" />
               </div>

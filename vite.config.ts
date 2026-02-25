@@ -11,7 +11,7 @@ export default defineConfig(({ mode }) => {
     },
     plugins: [react()],
     define: {
-      // Removed duplicate API_KEY alias \u2014 only GEMINI_API_KEY is referenced in the codebase
+      // Removed duplicate API_KEY alias — only GEMINI_API_KEY is referenced in the codebase
       'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
     },
     resolve: {
