@@ -75,6 +75,7 @@ export const Hero: React.FC = () => {
                       alt="Canadian business owner"
                       width={32}
                       height={32}
+                      loading="lazy"
                     />
                   </div>
                 ))}
@@ -124,7 +125,7 @@ export const Hero: React.FC = () => {
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-slate-50 to-transparent"></div>
+
     </section>
   );
 };

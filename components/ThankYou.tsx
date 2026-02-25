@@ -2,6 +2,9 @@
 import React, { useEffect } from 'react';
 import { CheckCircle } from 'lucide-react';
 import { Button } from './Button';
+import { Logo } from './Logo';
+
+const CURRENT_YEAR = new Date().getFullYear();
 
 export const ThankYou: React.FC = () => {
   useEffect(() => {
@@ -35,23 +38,9 @@ export const ThankYou: React.FC = () => {
     <div className="min-h-screen bg-[#020617] font-sans text-slate-100 selection:bg-blue-500/30 flex flex-col">
 
       {/* 1. Header (Consistent with Landing Page) */}
-      <nav className="h-16 flex items-center justify-center border-b border-white/5 bg-[#020617]/80 backdrop-blur-md sticky top-0 z-50">
-        <a href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity" aria-label="Back to Homepage">
-          <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center shadow-lg shadow-blue-500/20">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="3"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="w-5 h-5 text-white"
-            >
-              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-            </svg>
-          </div>
-          <span className="font-black text-xl tracking-tighter text-white">SiteEase<span className="text-blue-500">.ca</span></span>
+      <nav className="h-16 flex items-center justify-center bg-[#020617]/80 backdrop-blur-md sticky top-0 z-50">
+        <a href="/" className="hover:opacity-80 transition-opacity" aria-label="Back to Homepage">
+          <Logo iconSize="w-5 h-5" textSize="text-xl" />
         </a>
       </nav>
 
@@ -88,7 +77,7 @@ export const ThankYou: React.FC = () => {
 
       {/* 3. Footer */}
       <footer className="py-8 border-t border-white/5 text-center text-sm text-slate-500 bg-[#020617]">
-        <p>&copy; {new Date().getFullYear()} SiteEase.ca. Made in Ontario.</p>
+        <p>&copy; {CURRENT_YEAR} SiteEase.ca. Made in Ontario.</p>
       </footer>
     </div>
   );

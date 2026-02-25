@@ -1,15 +1,18 @@
 
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Check, Star, MapPin, Lock, Phone, ArrowRight, ShieldCheck } from 'lucide-react';
 import { Button } from './Button';
+import { Logo } from './Logo';
+
+const CURRENT_YEAR = new Date().getFullYear();
 
 export const LandingPageBrantford: React.FC = () => {
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting'>('idle');
 
-  const handleFormSubmit = async (e: React.FormEvent) => {
+  const handleFormSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
     setFormStatus('submitting');
-    
+
     const form = e.target as HTMLFormElement;
     const formData = new FormData(form);
 
@@ -24,7 +27,7 @@ export const LandingPageBrantford: React.FC = () => {
         { column_id: "COMPANY_NAME", string_value: formData.get('business') }
       ]
     };
-    
+
     try {
       // Use text/plain to avoid CORS preflight issues with Google Apps Script
       await fetch("https://script.google.com/macros/s/AKfycbwEL4rWHanpxrrvsSvQ07pz2e-cbWqLYhyfPWQxdZWG-4CI_rZzMNso1Q0P98y7AoyQmA/exec", {
@@ -46,50 +49,36 @@ export const LandingPageBrantford: React.FC = () => {
       // Immediate Redirect to Thank You Page
       // Using href ensures we navigate away from the current path effectively
       window.location.href = '/thank-you';
-      
+
     } catch (error) {
       console.error("Submission failed", error);
       // Fallback: Ensure redirect happens even if fetch fails/timeouts
       window.location.href = '/thank-you';
     }
-  };
+  }, []);
 
   return (
     <div className="min-h-screen bg-[#020617] font-sans text-slate-100 selection:bg-blue-500/30">
-      
+
       {/* 1. COMPACT HEADER - Distraction Free */}
-      <nav className="h-16 flex items-center justify-center border-b border-white/5 bg-[#020617]/80 backdrop-blur-md sticky top-0 z-50">
-        <a href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity" aria-label="Back to Homepage">
-          <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center shadow-lg shadow-blue-500/20">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="3"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="w-5 h-5 text-white"
-            >
-              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-            </svg>
-          </div>
-          <span className="font-black text-xl tracking-tighter text-white">SiteEase<span className="text-blue-500">.ca</span></span>
+      <nav className="h-16 flex items-center justify-center bg-[#020617]/80 backdrop-blur-md sticky top-0 z-50">
+        <a href="/" className="hover:opacity-80 transition-opacity" aria-label="Back to Homepage">
+          <Logo iconSize="w-5 h-5" textSize="text-xl" />
         </a>
       </nav>
 
       {/* 2. SPLIT-SCREEN HERO (The Conversion Engine) */}
       <section className="relative overflow-hidden pt-6 pb-12 lg:pt-0 lg:pb-0 lg:min-h-[calc(100vh-64px)] flex items-center">
-        
+
         {/* Background Texture */}
         <div className="absolute inset-0 pointer-events-none opacity-20">
-            <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-blue-600/20 rounded-full blur-[120px]"></div>
-            <div className="absolute bottom-[-10%] left-[-10%] w-[400px] h-[400px] bg-indigo-500/10 rounded-full blur-[100px]"></div>
+          <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-blue-600/20 rounded-full blur-[120px]"></div>
+          <div className="absolute bottom-[-10%] left-[-10%] w-[400px] h-[400px] bg-indigo-500/10 rounded-full blur-[100px]"></div>
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-            
+
             {/* LEFT COLUMN: The Hook (Magnetic Headline) */}
             <div className="text-center lg:text-left order-1 lg:order-1">
               <div className="inline-flex items-center gap-2 bg-blue-500/10 text-blue-300 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-6 border border-blue-500/20 mx-auto lg:mx-0">
@@ -99,11 +88,11 @@ export const LandingPageBrantford: React.FC = () => {
                 </span>
                 Brantford Business Exclusive
               </div>
-              
+
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1] text-white mb-6">
                 The <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600">$0 Down</span> Website Solution.
               </h1>
-              
+
               <p className="text-lg text-slate-400 mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0">
                 Stop risking thousands on agencies. We build, host, and manage your professional website for one flat monthly fee.
               </p>
@@ -112,19 +101,19 @@ export const LandingPageBrantford: React.FC = () => {
               <div className="hidden lg:flex flex-col gap-4 text-sm text-slate-300 font-medium">
                 <div className="flex items-center gap-3">
                   <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center">
-                    <Check className="w-4 h-4 text-green-400" /> 
+                    <Check className="w-4 h-4 text-green-400" />
                   </div>
                   Cancel anytime contract
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center">
-                    <Check className="w-4 h-4 text-green-400" /> 
+                    <Check className="w-4 h-4 text-green-400" />
                   </div>
                   Unlimited design updates included
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center">
-                    <Check className="w-4 h-4 text-green-400" /> 
+                    <Check className="w-4 h-4 text-green-400" />
                   </div>
                   100% Ontario-based support
                 </div>
@@ -146,57 +135,57 @@ export const LandingPageBrantford: React.FC = () => {
                   {/* Field 1: Name */}
                   <div>
                     <label htmlFor="name" className="sr-only">Full Name</label>
-                    <input 
+                    <input
                       id="name"
                       name="name"
-                      required 
-                      type="text" 
-                      className="w-full h-12 px-4 rounded-lg border border-slate-300 bg-slate-50 text-slate-900 placeholder-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all font-medium" 
-                      placeholder="Full Name" 
+                      required
+                      type="text"
+                      className="w-full h-12 px-4 rounded-lg border border-slate-300 bg-slate-50 text-slate-900 placeholder-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all font-medium"
+                      placeholder="Full Name"
                     />
                   </div>
 
                   {/* Field 2: Phone (Moved Up) */}
                   <div>
                     <label htmlFor="phone" className="sr-only">Phone Number</label>
-                    <input 
+                    <input
                       id="phone"
                       name="phone"
-                      required 
-                      type="tel" 
-                      className="w-full h-12 px-4 rounded-lg border border-slate-300 bg-slate-50 text-slate-900 placeholder-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all font-medium" 
-                      placeholder="Phone Number (Best for text)" 
+                      required
+                      type="tel"
+                      className="w-full h-12 px-4 rounded-lg border border-slate-300 bg-slate-50 text-slate-900 placeholder-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all font-medium"
+                      placeholder="Phone Number (Best for text)"
                     />
                   </div>
 
                   {/* Field 3: Email (New) */}
                   <div>
                     <label htmlFor="email" className="sr-only">Email Address</label>
-                    <input 
+                    <input
                       id="email"
                       name="email"
-                      required 
-                      type="email" 
-                      className="w-full h-12 px-4 rounded-lg border border-slate-300 bg-slate-50 text-slate-900 placeholder-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all font-medium" 
-                      placeholder="Email Address" 
-                    />
-                  </div>
-                  
-                  {/* Field 4: Business Name (Moved Down) */}
-                  <div>
-                    <label htmlFor="business" className="sr-only">Business Name</label>
-                    <input 
-                      id="business"
-                      name="business"
-                      required 
-                      type="text" 
-                      className="w-full h-12 px-4 rounded-lg border border-slate-300 bg-slate-50 text-slate-900 placeholder-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all font-medium" 
-                      placeholder="Business Name" 
+                      required
+                      type="email"
+                      className="w-full h-12 px-4 rounded-lg border border-slate-300 bg-slate-50 text-slate-900 placeholder-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all font-medium"
+                      placeholder="Email Address"
                     />
                   </div>
 
-                  <Button 
-                    fullWidth 
+                  {/* Field 4: Business Name (Moved Down) */}
+                  <div>
+                    <label htmlFor="business" className="sr-only">Business Name</label>
+                    <input
+                      id="business"
+                      name="business"
+                      required
+                      type="text"
+                      className="w-full h-12 px-4 rounded-lg border border-slate-300 bg-slate-50 text-slate-900 placeholder-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all font-medium"
+                      placeholder="Business Name"
+                    />
+                  </div>
+
+                  <Button
+                    fullWidth
                     className="h-14 text-lg font-black bg-blue-600 hover:bg-blue-500 text-white shadow-xl shadow-blue-600/30 transform transition-all active:scale-[0.98]"
                   >
                     {formStatus === 'submitting' ? 'Checking Eligibility...' : 'Check My Eligibility Now'}
@@ -208,7 +197,7 @@ export const LandingPageBrantford: React.FC = () => {
                   </div>
                 </form>
               </div>
-              
+
               {/* Mobile Only Trust Signals (Shown below form on mobile) */}
               <div className="lg:hidden mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-slate-400 font-medium">
                 <div className="flex items-center gap-2">
@@ -287,27 +276,27 @@ export const LandingPageBrantford: React.FC = () => {
       {/* 5. TESTIMONIALS */}
       <section className="py-20 px-4 bg-slate-50 border-t border-slate-200">
         <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-8">
-            <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-200">
-              <div className="flex gap-1 mb-4">
-                {[1,2,3,4,5].map(i => <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400" />)}
-              </div>
-              <p className="text-slate-700 mb-6 italic">"I was quoted $6,500 by another local agency. SiteEase built a better site for $0 down. It's a no-brainer."</p>
-              <div>
-                <div className="font-bold text-slate-900">Mike K.</div>
-                <div className="text-sm text-slate-500">Brant Custom Decks</div>
-              </div>
+          <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-200">
+            <div className="flex gap-1 mb-4">
+              {[1, 2, 3, 4, 5].map(i => <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400" />)}
             </div>
+            <p className="text-slate-700 mb-6 italic">"I was quoted $6,500 by another local agency. SiteEase built a better site for $0 down. It's a no-brainer."</p>
+            <div>
+              <div className="font-bold text-slate-900">Mike K.</div>
+              <div className="text-sm text-slate-500">Brant Custom Decks</div>
+            </div>
+          </div>
 
-            <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-200">
-              <div className="flex gap-1 mb-4">
-                {[1,2,3,4,5].map(i => <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400" />)}
-              </div>
-              <p className="text-slate-700 mb-6 italic">"My old site was embarrassing. SiteEase handled everything. Now I actually get leads from Google."</p>
-              <div>
-                <div className="font-bold text-slate-900">Sarah J.</div>
-                <div className="text-sm text-slate-500">Harmony Yoga Studio</div>
-              </div>
+          <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-200">
+            <div className="flex gap-1 mb-4">
+              {[1, 2, 3, 4, 5].map(i => <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400" />)}
             </div>
+            <p className="text-slate-700 mb-6 italic">"My old site was embarrassing. SiteEase handled everything. Now I actually get leads from Google."</p>
+            <div>
+              <div className="font-bold text-slate-900">Sarah J.</div>
+              <div className="text-sm text-slate-500">Harmony Yoga Studio</div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -319,14 +308,14 @@ export const LandingPageBrantford: React.FC = () => {
             Join the smart business owners in Brantford who switched to SiteEase.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button 
+            <Button
               className="h-14 px-8 text-lg font-bold bg-blue-600 hover:bg-blue-500 shadow-xl shadow-blue-500/20"
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             >
               Get My Free Quote
             </Button>
-            
-            <a 
+
+            <a
               href="tel:5195771449"
               className="group flex items-center justify-center h-14 px-8 rounded-lg border border-slate-200 text-slate-900 font-bold hover:bg-slate-50 hover:border-slate-300 transition-all"
             >
@@ -339,7 +328,7 @@ export const LandingPageBrantford: React.FC = () => {
 
       {/* FOOTER - Minimal */}
       <footer className="py-8 bg-white border-t border-slate-200 text-center text-sm text-slate-400">
-        <p>&copy; {new Date().getFullYear()} SiteEase.ca. <span className="hidden sm:inline">Made in Ontario.</span></p>
+        <p>&copy; {CURRENT_YEAR} SiteEase.ca. <span className="hidden sm:inline">Made in Ontario.</span></p>
       </footer>
     </div>
   );

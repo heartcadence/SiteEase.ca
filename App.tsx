@@ -42,6 +42,16 @@ function App() {
     // Check on initial load
     checkRoute();
 
+    // Ensure page starts at top on initial load (override hash/default scroll)
+    requestAnimationFrame(() => {
+      try {
+        window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      } catch (e) {
+        // fallback for older browsers
+        window.scrollTo(0, 0);
+      }
+    });
+
     // Listen for hash changes (internal navigation)
     window.addEventListener('hashchange', checkRoute);
 
@@ -52,19 +62,6 @@ function App() {
       window.removeEventListener('hashchange', checkRoute);
       window.removeEventListener('popstate', checkRoute);
     };
-  }, []);
-
-  // Ensure page starts at top on initial load (override hash/default scroll)
-  useEffect(() => {
-    // Run after browser's default handling so we reliably land at the top
-    requestAnimationFrame(() => {
-      try {
-        window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
-      } catch (e) {
-        // fallback for older browsers
-        window.scrollTo(0, 0);
-      }
-    });
   }, []);
 
   if (currentPage === 'offer') {
@@ -93,7 +90,7 @@ function App() {
         Skip to main content
       </a>
 
-      <Suspense fallback={<div className="h-16 bg-[#020617]" />}>
+      <Suspense fallback={<div className="h-20 bg-[#020617]" />}>
         <Header />
       </Suspense>
 
