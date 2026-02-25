@@ -27,7 +27,7 @@ export const Header: React.FC = () => {
   const toggleMenu = useCallback(() => setIsMenuOpen(prev => !prev), []);
 
   return (
-    <header className={`sticky top-0 z-40 w-full transition-all duration-300 ${isScrolled ? 'bg-[#020617]/95 backdrop-blur-md shadow-xl' : 'bg-transparent'
+    <header className={`sticky top-0 z-40 w-full transition-all duration-300 ${isScrolled ? 'bg-[#020617]/95 backdrop-blur-md shadow-xl border-b border-white/5' : 'bg-transparent'
       }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">

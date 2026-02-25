@@ -23,12 +23,12 @@ export const Hero: React.FC = () => {
   return (
     <section className="relative min-h-[90vh] flex items-center bg-[#020617] overflow-hidden pt-20 pb-12" aria-label="Hero Section">
       <div className="absolute inset-0 z-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(#3b82f6 0.5px, transparent 0.5px)', backgroundSize: '24px 24px' }}></div>
-      <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-600/5 rounded-full blur-[100px] pointer-events-none"></div>
 
-      {/* Fade to next section - color-to-color transition for better reliability */}
+      {/* Fade to next section - increased overlap to prevent sub-pixel gaps */}
       <div
-        className="absolute bottom-[-1px] left-0 right-0 h-48 pointer-events-none z-0"
-        style={{ background: 'linear-gradient(to top, #f8fafc 0%, rgba(2, 6, 23, 0) 100%)' }}
+        className="absolute -bottom-[2px] left-0 right-0 h-48 pointer-events-none z-0"
+        style={{ background: 'linear-gradient(to top, #f8fafc 2px, rgba(2, 6, 23, 0) 100%)' }}
       ></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">

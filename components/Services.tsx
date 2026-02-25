@@ -39,7 +39,7 @@ const SUBTITLE = "Stop stressing over broken links and website hackers. SiteEase
 export const Services: React.FC = () => {
 
   return (
-    <section id="services" className="py-24 bg-slate-50" aria-labelledby="services-heading">
+    <section id="services" className="relative -mt-px py-24 bg-slate-50" aria-labelledby="services-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <div className="text-center max-w-3xl mx-auto mb-16">
