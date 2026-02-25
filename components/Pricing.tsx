@@ -1,21 +1,35 @@
 
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Check, Info } from 'lucide-react';
 import { Button } from './Button';
 
-export const Pricing: React.FC = () => {
-  const plans = {
-    launch: {
-      price: 49,
-      yearlyTotal: 588
-    },
-    growth: {
-      price: 99,
-      yearlyTotal: 1188
-    }
-  };
+// Hoisted to module scope — pure data, no need to recreate on each render
+const PLANS = {
+  launch: { price: 49, yearlyTotal: 588 },
+  growth: { price: 99, yearlyTotal: 1188 },
+};
 
-  const handlePlanSelect = (planName: string) => {
+const LAUNCH_FEATURES = [
+  'Secure Cloud Hosting',
+  'Domain Management',
+  'Daily Backups',
+  '30 Mins of Content Updates/mo',
+  'Standard Email Support',
+];
+
+const GROWTH_FEATURES = [
+  'Everything in Launch',
+  'Priority Hosting Tier',
+  'Real-time Security Monitoring',
+  'Unlimited Minor Content Updates',
+  'Malware Removal Guarantee',
+  'Monthly SEO & Performance Report',
+  'Priority Email & Phone Support',
+];
+
+export const Pricing: React.FC = () => {
+  // useCallback ensures handlePlanSelect is not recreated on every render
+  const handlePlanSelect = useCallback((_planName: string) => {
     // 1. Trigger Google Ads Conversion
     if (typeof window !== 'undefined' && (window as any).trackSubscriptionLead) {
       (window as any).trackSubscriptionLead();
@@ -26,7 +40,7 @@ export const Pricing: React.FC = () => {
     if (contactSection) {
       contactSection.scrollIntoView({ behavior: 'smooth' });
     }
-  };
+  }, []);
 
   return (
     <section id="pricing" className="py-24 bg-slate-50" aria-labelledby="pricing-heading">
@@ -47,20 +61,14 @@ export const Pricing: React.FC = () => {
               <h3 className="text-xl font-bold text-slate-900">Launch</h3>
               <div className="mt-4 flex items-baseline">
                 <span className="text-5xl font-bold tracking-tight text-slate-900">
-                  ${plans.launch.price}
+                  ${PLANS.launch.price}
                 </span>
                 <span className="ml-1 text-xl font-semibold text-slate-500">/mo</span>
               </div>
             </div>
 
             <ul className="space-y-4 mb-8 flex-1">
-              {[
-                'Secure Cloud Hosting',
-                'Domain Management',
-                'Daily Backups',
-                '30 Mins of Content Updates/mo',
-                'Standard Email Support'
-              ].map((feature) => (
+              {LAUNCH_FEATURES.map((feature) => (
                 <li key={feature} className="flex items-start">
                   <Check className="h-5 w-5 text-blue-600 shrink-0 mr-3" />
                   <span className="text-sm text-slate-600">{feature}</span>
@@ -68,9 +76,9 @@ export const Pricing: React.FC = () => {
               ))}
             </ul>
 
-            <Button 
-              variant="secondary" 
-              fullWidth 
+            <Button
+              variant="secondary"
+              fullWidth
               className="mt-auto"
               onClick={() => handlePlanSelect('Launch')}
             >
@@ -83,27 +91,19 @@ export const Pricing: React.FC = () => {
             <div className="absolute -top-4 right-8 bg-blue-600 text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-sm">
               Most Popular
             </div>
-            
+
             <div className="mb-6">
               <h3 className="text-xl font-bold text-slate-900">Growth</h3>
               <div className="mt-4 flex items-baseline">
                 <span className="text-5xl font-bold tracking-tight text-slate-900">
-                  ${plans.growth.price}
+                  ${PLANS.growth.price}
                 </span>
                 <span className="ml-1 text-xl font-semibold text-slate-500">/mo</span>
               </div>
             </div>
 
             <ul className="space-y-4 mb-8 flex-1">
-              {[
-                'Everything in Launch',
-                'Priority Hosting Tier',
-                'Real-time Security Monitoring',
-                'Unlimited Minor Content Updates',
-                'Malware Removal Guarantee',
-                'Monthly SEO & Performance Report',
-                'Priority Email & Phone Support'
-              ].map((feature) => (
+              {GROWTH_FEATURES.map((feature) => (
                 <li key={feature} className="flex items-start">
                   <Check className="h-5 w-5 text-blue-600 shrink-0 mr-3" />
                   <span className="text-sm text-slate-600 font-medium">{feature}</span>
@@ -115,9 +115,9 @@ export const Pricing: React.FC = () => {
               <div className="flex items-center justify-center gap-1 text-[10px] text-slate-400 mb-3 uppercase tracking-widest font-bold">
                 <Info className="w-3 h-3" /> Zero setup fees
               </div>
-              <Button 
-                variant="accent" 
-                fullWidth 
+              <Button
+                variant="accent"
+                fullWidth
                 className="py-4 text-lg"
                 onClick={() => handlePlanSelect('Growth')}
               >

@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from './Button';
 import { NavLink } from '../types';
@@ -18,16 +18,16 @@ export const Header: React.FC = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  // Functional update avoids stale closure; useCallback avoids recreating on every render
+  const toggleMenu = useCallback(() => setIsMenuOpen(prev => !prev), []);
 
   return (
-    <header className={`sticky top-0 z-40 w-full transition-all duration-300 ${
-      isScrolled ? 'bg-[#020617]/95 backdrop-blur-md border-b border-white/10 shadow-lg' : 'bg-transparent'
-    }`}>
+    <header className={`sticky top-0 z-40 w-full transition-all duration-300 ${isScrolled ? 'bg-[#020617]/95 backdrop-blur-md border-b border-white/10 shadow-lg' : 'bg-transparent'
+      }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
@@ -65,9 +65,9 @@ export const Header: React.FC = () => {
                 {link.label}
               </a>
             ))}
-             {/* Special Offer Link for Demo */}
-             <a href="#/offer" className="text-green-400 hover:text-green-300 font-bold text-sm uppercase tracking-widest border border-green-500/30 px-3 py-1 rounded-full bg-green-500/10">
-                Brantford Offer
+            {/* Special Offer Link for Demo */}
+            <a href="#/offer" className="text-green-400 hover:text-green-300 font-bold text-sm uppercase tracking-widest border border-green-500/30 px-3 py-1 rounded-full bg-green-500/10">
+              Brantford Offer
             </a>
 
             <a href="#contact" tabIndex={-1}>
@@ -108,7 +108,7 @@ export const Header: React.FC = () => {
               </a>
             ))}
             <a href="#/offer" onClick={() => setIsMenuOpen(false)} className="block px-3 py-3 rounded-xl text-lg font-bold text-green-400 hover:bg-white/5">
-                View Brantford Offer
+              View Brantford Offer
             </a>
             <div className="pt-4">
               <a href="#contact" onClick={() => setIsMenuOpen(false)} className="block">

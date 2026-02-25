@@ -3,8 +3,10 @@ import React, { useState } from 'react';
 import { Button } from './Button';
 import { CheckCircle, ArrowRight, Loader2, AlertCircle } from 'lucide-react';
 
+// Computed once at module load — no need to recalculate on every render
+const CURRENT_YEAR = new Date().getFullYear();
+
 export const Footer: React.FC = () => {
-  const currentYear = new Date().getFullYear();
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -13,10 +15,10 @@ export const Footer: React.FC = () => {
     e.preventDefault();
     setIsSubmitting(true);
     setError(null);
-    
+
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
-    
+
     try {
       const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxdmPMg8DwlU85AShuMMPtxHflLem7gHJm0iJdvArnkkXEJsnii0l0FujM1XbVeON_S/exec';
 
@@ -44,9 +46,9 @@ export const Footer: React.FC = () => {
   return (
     <footer id="contact" className="bg-slate-900 text-white pt-16 pb-8 border-t border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 mb-16 items-start">
-          
+
           <div>
             <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl mb-6">
               Ready to get more customers through your door?
@@ -54,14 +56,14 @@ export const Footer: React.FC = () => {
             <p className="text-lg text-slate-400 mb-8 max-w-lg leading-relaxed">
               Start your journey with SiteEase today. Fill out the form and we’ll get back to you within 24 hours to talk about your new site.
             </p>
-            
+
             <div className="space-y-4 text-slate-300">
               <p>
-                <span className="font-semibold text-white block mb-1">Email:</span> 
+                <span className="font-semibold text-white block mb-1">Email:</span>
                 <a href="mailto:support@siteease.ca" className="hover:text-blue-400 transition-colors">support@siteease.ca</a>
               </p>
               <p>
-                <span className="font-semibold text-white block mb-1">Hours:</span> 
+                <span className="font-semibold text-white block mb-1">Hours:</span>
                 Mon-Fri, 9am - 5pm EST
               </p>
             </div>
@@ -156,8 +158,8 @@ export const Footer: React.FC = () => {
                 <p className="text-slate-400 mb-8">
                   Thanks for reaching out. We've received your request and a Growth specialist will follow up shortly.
                 </p>
-                <Button 
-                  variant="secondary" 
+                <Button
+                  variant="secondary"
                   onClick={() => setIsSubmitted(false)}
                   className="mx-auto"
                 >
@@ -171,7 +173,7 @@ export const Footer: React.FC = () => {
         <div className="border-t border-slate-800 my-8"></div>
 
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-500">
-          <p>&copy; {currentYear} SiteEase.ca. All rights reserved.</p>
+          <p>&copy; {CURRENT_YEAR} SiteEase.ca. All rights reserved.</p>
           <div className="flex flex-wrap justify-center gap-6">
             <a href="#privacy" className="hover:text-white transition-colors">Privacy Policy</a>
             <a href="#terms" className="hover:text-white transition-colors">Terms of Service</a>
