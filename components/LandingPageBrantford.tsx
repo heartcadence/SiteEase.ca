@@ -273,35 +273,8 @@ export const LandingPageBrantford: React.FC = () => {
         </div>
       </section>
 
-      {/* 5. TESTIMONIALS */}
-      <section className="py-20 px-4 bg-slate-50 border-t border-slate-200">
-        <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-8">
-          <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-200">
-            <div className="flex gap-1 mb-4">
-              {[1, 2, 3, 4, 5].map(i => <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400" />)}
-            </div>
-            <p className="text-slate-700 mb-6 italic">"I was quoted $6,500 by another local agency. SiteEase built a better site for $0 down. It's a no-brainer."</p>
-            <div>
-              <div className="font-bold text-slate-900">Mike K.</div>
-              <div className="text-sm text-slate-500">Brant Custom Decks</div>
-            </div>
-          </div>
-
-          <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-200">
-            <div className="flex gap-1 mb-4">
-              {[1, 2, 3, 4, 5].map(i => <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400" />)}
-            </div>
-            <p className="text-slate-700 mb-6 italic">"My old site was embarrassing. SiteEase handled everything. Now I actually get leads from Google."</p>
-            <div>
-              <div className="font-bold text-slate-900">Sarah J.</div>
-              <div className="text-sm text-slate-500">Harmony Yoga Studio</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 6. FINAL CTA (Matched to Screenshot) */}
-      <section className="py-20 px-4 bg-white text-center border-t border-slate-100">
+      {/* 5. FINAL CTA (Matched to Screenshot) */}
+      <section className="py-20 px-4 bg-slate-50 text-center border-t border-slate-200">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-3xl font-bold text-slate-900 mb-4">Invest in your business, not a website.</h2>
           <p className="text-lg text-slate-600 mb-10">
