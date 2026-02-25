@@ -71,7 +71,7 @@ export const Hero: React.FC = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3 }}
-              className="mt-12 flex items-center justify-center lg:justify-start gap-4 text-slate-400 text-sm font-bold uppercase tracking-widest"
+              className="mt-12 flex items-center justify-center lg:justify-start gap-4 text-[#020617] text-sm font-black uppercase tracking-widest"
             >
               <div className="flex -space-x-2">
                 {[1, 2, 3].map(i => (
