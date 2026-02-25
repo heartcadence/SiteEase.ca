@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Button } from './Button';
 
 export const CookieConsent: React.FC = () => {
@@ -14,21 +14,21 @@ export const CookieConsent: React.FC = () => {
     }
   }, []);
 
-  const handleAccept = () => {
+  const handleAccept = useCallback(() => {
     localStorage.setItem('siteease_consent', 'true');
     setIsVisible(false);
-  };
+  }, []);
 
-  const handleDecline = () => {
+  const handleDecline = useCallback(() => {
     localStorage.setItem('siteease_consent', 'false');
     setIsVisible(false);
-  };
+  }, []);
 
   if (!isVisible) return null;
 
   return (
-    <div 
-      role="region" 
+    <div
+      role="region"
       aria-label="Cookie Consent"
       className="fixed bottom-0 left-0 right-0 z-50 p-4 md:p-6 bg-white border-t border-slate-200 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] animate-in slide-in-from-bottom-full duration-500"
     >
@@ -36,8 +36,8 @@ export const CookieConsent: React.FC = () => {
         <div className="flex-1">
           <h3 className="text-sm font-semibold text-slate-900 mb-1">We value your privacy</h3>
           <p className="text-sm text-slate-600 max-w-3xl">
-            SiteEase uses cookies to enhance your browsing experience and analyze site traffic in compliance with PIPEDA and GDPR. 
-            By clicking "Accept", you consent to our use of cookies. 
+            SiteEase uses cookies to enhance your browsing experience and analyze site traffic in compliance with PIPEDA and GDPR.
+            By clicking "Accept", you consent to our use of cookies.
             <a href="#privacy" className="underline text-blue-600 hover:text-blue-800 ml-1">Privacy Policy</a>.
           </p>
         </div>

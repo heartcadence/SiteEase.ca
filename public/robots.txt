@@ -1,10 +1,4 @@
 User-agent: *
 Allow: /
 
-User-agent: GPTBot
-Disallow: /
-
-User-agent: Google-Extended
-Disallow: /
-
-Sitemap: https://www.siteease.ca/sitemap.xml
+Sitemap: https://siteease.ca/sitemap.xml

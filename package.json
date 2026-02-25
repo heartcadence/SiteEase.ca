@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.1.18",
+    "@tailwindcss/vite": "^4.0.9",
     "framer-motion": "^11.11.17",
     "lucide-react": "^0.556.0",
     "react": "^19.2.1",
